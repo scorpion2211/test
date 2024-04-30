@@ -7,15 +7,22 @@
   }
 }
 
-.container {
+.options {
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  height: calc(100vh - 78px);
-  background-color: $color-secondary;
-  padding: 80px 50px;
-  &__serach-button {
-    padding: 10px;
-    border-radius: 7px;
-    margin-bottom: 15px;
+  margin-bottom: 15px;
+  &__serach-input {
+    width: 300px;
+  }
+  &__add {
+    background-color: $color-yellow;
+    font-weight: bold;
+    font-size: 12px;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 3px;
+    height: 50px;
   }
 }
 
@@ -142,10 +149,15 @@ table {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $breackpoint) {
   .container {
     height: calc(100vh - 68px);
     padding: 40px 20px;
+  }
+  .options {
+    &__serach-input {
+      width: 220px;
+    }
   }
   table {
     font-size: 13px;

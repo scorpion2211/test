@@ -67,7 +67,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: $breackpoint) {
   .modal-size {
     &-xs,
     &-md,

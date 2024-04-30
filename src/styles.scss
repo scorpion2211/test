@@ -3,13 +3,17 @@
   src: url("./assets/fonts/Sansation_Regular.ttf") format("opentype");
 }
 
-$color-primary: #23316d;
+$breackpoint: 768px;
+
+$color-primary: rgb(51, 71, 116);
 $color-secondary: #f4f8ff;
 $color-tertiary: rgb(224, 224, 224);
 $color-white: #fff;
 $color-black: #222;
 $color-black-secondary: #444;
 $color-gray: rgb(139, 139, 139);
+$color-yellow: rgb(245, 223, 102);
+$color-red: rgb(223, 88, 88);
 $color-disabled: rgb(235, 235, 235);
 $color-border: rgb(199, 199, 199);
 
@@ -20,10 +24,56 @@ $color-border: rgb(199, 199, 199);
   font-family: "Sansation_Regular", sans-serif;
   input,
   select {
+    height: 48px;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 7px;
     border: solid 1px $color-border;
     outline: none;
     &:focus {
       outline: solid 1px $color-gray;
     }
+  }
+}
+
+.container {
+  width: 100%;
+  height: calc(100vh - 78px);
+  background-color: $color-secondary;
+  padding: 80px 50px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media screen and (max-width: $breackpoint) {
+  * {
+    input,
+    select {
+      padding: 3px 5px;
+      height: 40px;
+      font-size: 12px;
+    }
+  }
+  .container {
+    height: calc(100vh - 68px);
+    padding: 40px 20px;
+  }
+  .col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding-right: 0;
+    padding-left: 0;
   }
 }

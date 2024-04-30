@@ -8,12 +8,15 @@
   background-color: $color-white;
   padding: 25px;
   color: $color-primary;
-
-  &__title {
-    margin-left: 10px;
+}
+.title {
+  margin-left: 10px;
+  cursor: pointer;
+  i {
+    margin-right: 10px;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $breackpoint) {
   .header {
     padding: 15px;
   }
