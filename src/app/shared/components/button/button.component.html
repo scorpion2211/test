@@ -1,0 +1,12 @@
+<button
+  class="devsu-button"
+  [ngClass]="{
+    'devsu-button--primary': typeButton.PRIMARY === type,
+    'devsu-button--secondary': typeButton.SECONDARY === type
+  }"
+  [ngStyle]="{ width: widthButton }"
+  [disabled]="disabled"
+  (click)="action()"
+>
+  {{ text }}
+</button>

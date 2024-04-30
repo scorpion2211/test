@@ -1,6 +1,8 @@
-export const MOCK_RECORDS = [
+import { IDataRecord } from './records.interface';
+
+export const MOCK_RECORDS: IDataRecord[] = [
   {
-    id: 1,
+    id: 'esMuuS',
     name: 'Nombre 1',
     description: 'Descripción 1',
     logo: 'logo.png',
@@ -8,7 +10,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-04-01',
   },
   {
-    id: 2,
+    id: 'cEDIux',
     name: 'Nombre 2',
     description: 'Descripción 2',
     logo: 'logo.png',
@@ -16,7 +18,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-04-14',
   },
   {
-    id: 3,
+    id: 'wGXBww',
     name: 'Nombre 3',
     description: 'Descripción 3',
     logo: 'logo.png',
@@ -24,7 +26,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-04-02',
   },
   {
-    id: 4,
+    id: 'HeFzZb',
     name: 'Nombre 4',
     description: 'Descripción 4',
     logo: 'logo.png',
@@ -32,7 +34,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-31',
   },
   {
-    id: 5,
+    id: 'PLpMwY',
     name: 'Nombre 5',
     description: 'Descripción 5',
     logo: 'logo.png',
@@ -40,7 +42,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-15',
   },
   {
-    id: 6,
+    id: 'hVGVTz',
     name: 'Nombre 6',
     description: 'Descripción 6',
     logo: 'logo.png',
@@ -48,7 +50,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-30',
   },
   {
-    id: 7,
+    id: 'GZFyuo',
     name: 'Nombre 7',
     description: 'Descripción 7',
     logo: 'logo.png',
@@ -56,7 +58,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-20',
   },
   {
-    id: 8,
+    id: 'gfdFiJ',
     name: 'Nombre 8',
     description: 'Descripción 8',
     logo: 'logo.png',
@@ -64,7 +66,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-04-04',
   },
   {
-    id: 9,
+    id: 'IfCjtP',
     name: 'Nombre 9',
     description: 'Descripción 9',
     logo: 'logo.png',
@@ -72,7 +74,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-31',
   },
   {
-    id: 10,
+    id: 'jFGFUf',
     name: 'Nombre 10',
     description: 'Descripción 10',
     logo: 'logo.png',
@@ -80,7 +82,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-24',
   },
   {
-    id: 11,
+    id: 'iQsUIv',
     name: 'Nombre 11',
     description: 'Descripción 11',
     logo: 'logo.png',
@@ -88,7 +90,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-12',
   },
   {
-    id: 12,
+    id: 'tPHXYG',
     name: 'Nombre 12',
     description: 'Descripción 12',
     logo: 'logo.png',
@@ -96,7 +98,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-04-09',
   },
   {
-    id: 13,
+    id: 'oUdaTG',
     name: 'Nombre 13',
     description: 'Descripción 13',
     logo: 'logo.png',
@@ -104,7 +106,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-04-21',
   },
   {
-    id: 14,
+    id: 'WQEABj',
     name: 'Nombre 14',
     description: 'Descripción 14',
     logo: 'logo.png',
@@ -112,7 +114,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-04-28',
   },
   {
-    id: 15,
+    id: 'sfiaCv',
     name: 'Nombre 15',
     description: 'Descripción 15',
     logo: 'logo.png',
@@ -120,7 +122,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-04-03',
   },
   {
-    id: 16,
+    id: 'gCnJpw',
     name: 'Nombre 16',
     description: 'Descripción 16',
     logo: 'logo.png',
@@ -128,7 +130,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-02-16',
   },
   {
-    id: 17,
+    id: 'dcwvkC',
     name: 'Nombre 17',
     description: 'Descripción 17',
     logo: 'logo.png',
@@ -136,7 +138,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-08',
   },
   {
-    id: 18,
+    id: 'YBlTqt',
     name: 'Nombre 18',
     description: 'Descripción 18',
     logo: 'logo.png',
@@ -144,7 +146,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-27',
   },
   {
-    id: 19,
+    id: 'ZxCXvg',
     name: 'Nombre 19',
     description: 'Descripción 19',
     logo: 'logo.png',
@@ -152,7 +154,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-27',
   },
   {
-    id: 20,
+    id: 'UYPvoK',
     name: 'Nombre 20',
     description: 'Descripción 20',
     logo: 'logo.png',
@@ -160,7 +162,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-31',
   },
   {
-    id: 21,
+    id: 'pFPrns',
     name: 'Nombre 21',
     description: 'Descripción 21',
     logo: 'logo.png',
@@ -168,7 +170,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-28',
   },
   {
-    id: 22,
+    id: 'hvNUZE',
     name: 'Nombre 22',
     description: 'Descripción 22',
     logo: 'logo.png',
@@ -176,7 +178,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-02-04',
   },
   {
-    id: 23,
+    id: 'gTxASf',
     name: 'Nombre 23',
     description: 'Descripción 23',
     logo: 'logo.png',
@@ -184,7 +186,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-04-01',
   },
   {
-    id: 24,
+    id: 'WLUnAT',
     name: 'Nombre 24',
     description: 'Descripción 24',
     logo: 'logo.png',
@@ -192,7 +194,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-02-27',
   },
   {
-    id: 25,
+    id: 'nsIMcs',
     name: 'Nombre 25',
     description: 'Descripción 25',
     logo: 'logo.png',
@@ -200,7 +202,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-17',
   },
   {
-    id: 26,
+    id: 'bHjAsI',
     name: 'Nombre 26',
     description: 'Descripción 26',
     logo: 'logo.png',
@@ -208,7 +210,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-25',
   },
   {
-    id: 27,
+    id: 'tbYBQL',
     name: 'Nombre 27',
     description: 'Descripción 27',
     logo: 'logo.png',
@@ -216,7 +218,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-11',
   },
   {
-    id: 28,
+    id: 'cDEmAt',
     name: 'Nombre 28',
     description: 'Descripción 28',
     logo: 'logo.png',
@@ -224,7 +226,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-06',
   },
   {
-    id: 29,
+    id: 'gxppji',
     name: 'Nombre 29',
     description: 'Descripción 29',
     logo: 'logo.png',
@@ -232,7 +234,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-23',
   },
   {
-    id: 30,
+    id: 'bgQODt',
     name: 'Nombre 30',
     description: 'Descripción 30',
     logo: 'logo.png',
@@ -240,7 +242,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-04-16',
   },
   {
-    id: 31,
+    id: 'AVpLwK',
     name: 'Nombre 31',
     description: 'Descripción 31',
     logo: 'logo.png',
@@ -248,7 +250,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-06',
   },
   {
-    id: 32,
+    id: 'nFNbRl',
     name: 'Nombre 32',
     description: 'Descripción 32',
     logo: 'logo.png',
@@ -256,7 +258,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-15',
   },
   {
-    id: 33,
+    id: 'PaMlfX',
     name: 'Nombre 33',
     description: 'Descripción 33',
     logo: 'logo.png',
@@ -264,7 +266,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-07',
   },
   {
-    id: 34,
+    id: 'vMaAHQ',
     name: 'Nombre 34',
     description: 'Descripción 34',
     logo: 'logo.png',
@@ -272,7 +274,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-05',
   },
   {
-    id: 35,
+    id: 'qmFmEL',
     name: 'Nombre 35',
     description: 'Descripción 35',
     logo: 'logo.png',
@@ -280,7 +282,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-02-28',
   },
   {
-    id: 36,
+    id: 'FAkpSP',
     name: 'Nombre 36',
     description: 'Descripción 36',
     logo: 'logo.png',
@@ -288,7 +290,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-18',
   },
   {
-    id: 37,
+    id: 'YyFAvj',
     name: 'Nombre 37',
     description: 'Descripción 37',
     logo: 'logo.png',
@@ -296,7 +298,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-18',
   },
   {
-    id: 38,
+    id: 'JbyHSQ',
     name: 'Nombre 38',
     description: 'Descripción 38',
     logo: 'logo.png',
@@ -304,7 +306,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-26',
   },
   {
-    id: 39,
+    id: 'ieiJIt',
     name: 'Nombre 39',
     description: 'Descripción 39',
     logo: 'logo.png',
@@ -312,7 +314,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-17',
   },
   {
-    id: 40,
+    id: 'arRQRp',
     name: 'Nombre 40',
     description: 'Descripción 40',
     logo: 'logo.png',
@@ -320,7 +322,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-04-24',
   },
   {
-    id: 41,
+    id: 'YwGXHZ',
     name: 'Nombre 41',
     description: 'Descripción 41',
     logo: 'logo.png',
@@ -328,7 +330,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-11',
   },
   {
-    id: 42,
+    id: 'lHpIXH',
     name: 'Nombre 42',
     description: 'Descripción 42',
     logo: 'logo.png',
@@ -336,7 +338,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-02-05',
   },
   {
-    id: 43,
+    id: 'ppdqWQ',
     name: 'Nombre 43',
     description: 'Descripción 43',
     logo: 'logo.png',
@@ -344,7 +346,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-02-07',
   },
   {
-    id: 44,
+    id: 'jksEXD',
     name: 'Nombre 44',
     description: 'Descripción 44',
     logo: 'logo.png',
@@ -352,7 +354,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-02-11',
   },
   {
-    id: 45,
+    id: 'UwgyUh',
     name: 'Nombre 45',
     description: 'Descripción 45',
     logo: 'logo.png',
@@ -360,7 +362,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-12',
   },
   {
-    id: 46,
+    id: 'zGWRVY',
     name: 'Nombre 46',
     description: 'Descripción 46',
     logo: 'logo.png',
@@ -368,7 +370,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-01-13',
   },
   {
-    id: 47,
+    id: 'CSkIUz',
     name: 'Nombre 47',
     description: 'Descripción 47',
     logo: 'logo.png',
@@ -376,7 +378,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-02-22',
   },
   {
-    id: 48,
+    id: 'umuRmu',
     name: 'Nombre 48',
     description: 'Descripción 48',
     logo: 'logo.png',
@@ -384,7 +386,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-02-26',
   },
   {
-    id: 49,
+    id: 'mXtPxK',
     name: 'Nombre 49',
     description: 'Descripción 49',
     logo: 'logo.png',
@@ -392,7 +394,7 @@ export const MOCK_RECORDS = [
     date_revision: '2024-03-13',
   },
   {
-    id: 50,
+    id: 'kgsJdC',
     name: 'Nombre 50',
     description: 'Descripción 50',
     logo: 'logo.png',

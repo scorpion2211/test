@@ -1,5 +1,5 @@
-export interface IDataRecords {
-  id: number;
+export interface IDataRecord {
+  id: string;
   name: string;
   description: string;
   logo: string;

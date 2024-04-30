@@ -1,79 +1,95 @@
 <div class="container">
-  <form class="form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <div class="col-md-6 form-group">
-        <label class="form-group__label" for="id">ID</label>
-        <input type="text" formControlName="id" class="form-group__input" />
-        <div *ngIf="submitted && formControls['id'].invalid" class="form-group__text-invalid">
-          {{ formControls['id'].value === '' ? 'Este campo es requerido' : 'ID no válido' }}
+  <div class="form">
+    <h1>{{ isEditMode ? 'Editar de Registro' : 'Formulario de Registro' }}</h1>
+    <form class="data" [formGroup]="productForm">
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label class="form-group__label" for="id">ID</label>
+          <input type="text" formControlName="id" class="form-group__input" />
+          <div *ngIf="submitted && formControls['id'].invalid" class="form-group__text-invalid">
+            {{ formControls['id'].value === '' ? 'Este campo es requerido' : 'ID no válido' }}
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="form-group__label" for="name">Nombre</label>
+          <input type="text" formControlName="name" class="form-group__input" />
+          <div *ngIf="submitted && formControls['name'].invalid" class="form-group__text-invalid">
+            {{
+              formControls['description'].value === ''
+                ? 'Este campo es requerido'
+                : 'Nombre no válido'
+            }}
+          </div>
         </div>
       </div>
-      <div class="col-md-6 form-group">
-        <label class="form-group__label" for="name">Nombre</label>
-        <input type="text" formControlName="name" class="form-group__input" />
-        <div *ngIf="submitted && formControls['name'].invalid" class="form-group__text-invalid">
-          {{
-            formControls['description'].value === ''
-              ? 'Este campo es requerido'
-              : 'Nombre no válido'
-          }}
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label class="form-group__label" for="description">Descripción</label>
+          <input type="text" formControlName="description" class="form-group__input" />
+          <div
+            *ngIf="submitted && formControls['description'].invalid"
+            class="form-group__text-invalid"
+          >
+            {{
+              formControls['description'].value === ''
+                ? 'Este campo es requerido'
+                : 'Description no válida'
+            }}
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="form-group__label" for="logo">Logo</label>
+          <input type="text" formControlName="logo" class="form-group__input" />
+          <div
+            *ngIf="
+              submitted &&
+              (formControls['date_release'].invalid ||
+                formControls['logo'].errors?.['urlInvalidImage'])
+            "
+            class="form-group__text-invalid"
+          >
+            {{
+              formControls['logo'].value === ''
+                ? 'Este campo es requerido'
+                : 'URL de imagen no válida'
+            }}
+          </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 form-group">
-        <label class="form-group__label" for="description">Descripción</label>
-        <input type="text" formControlName="description" class="form-group__input" />
-        <div
-          *ngIf="submitted && formControls['description'].invalid"
-          class="form-group__text-invalid"
-        >
-          {{
-            formControls['description'].value === ''
-              ? 'Este campo es requerido'
-              : 'Description no válida'
-          }}
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label class="form-group__label" for="date_release">Fecha Liberación</label>
+          <input type="text" formControlName="date_release" class="form-group__input" />
+          <div
+            *ngIf="submitted && formControls['date_release'].invalid"
+            class="form-group__text-invalid"
+          >
+            {{
+              formControls['date_release'].value === ''
+                ? 'Este campo es requerido'
+                : 'Fecha no válida'
+            }}
+          </div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label class="form-group__label" for="date_revision">Fecha Revisión</label>
+          <input type="text" formControlName="date_revision" class="form-group__input" />
         </div>
       </div>
-      <div class="col-md-6 form-group">
-        <label class="form-group__label" for="logo">Logo</label>
-        <input type="text" formControlName="logo" class="form-group__input" />
-        <div
-          *ngIf="
-            submitted &&
-            (formControls['date_release'].invalid ||
-              formControls['logo'].errors?.['urlInvalidImage'])
-          "
-          class="form-group__text-invalid"
-        >
-          {{
-            formControls['logo'].value === ''
-              ? 'Este campo es requerido'
-              : 'URL de imagen no válida'
-          }}
-        </div>
+      <div class="actions">
+        <app-button
+          text="Reiniciar"
+          widthButton="120px"
+          [type]="typeButton.SECONDARY"
+          (actionClick)="resetForm()"
+        ></app-button>
+        <app-button
+          text="Enviar"
+          widthButton="120px"
+          [type]="typeButton.PRIMARY"
+          (actionClick)="onSubmit()"
+        ></app-button>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 form-group">
-        <label class="form-group__label" for="date_release">Fecha Liberación</label>
-        <input type="text" formControlName="date_release" class="form-group__input" />
-        <div
-          *ngIf="submitted && formControls['date_release'].invalid"
-          class="form-group__text-invalid"
-        >
-          {{
-            formControls['date_release'].value === ''
-              ? 'Este campo es requerido'
-              : 'Fecha no válida'
-          }}
-        </div>
-      </div>
-      <div class="col-md-6 form-group">
-        <label class="form-group__label" for="date_revision">Fecha Revisión</label>
-        <input type="text" formControlName="date_revision" class="form-group__input" />
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+    </form>
+  </div>
 </div>

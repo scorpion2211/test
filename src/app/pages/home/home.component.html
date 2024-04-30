@@ -1,7 +1,7 @@
 <div class="container">
   <div class="options">
     <input class="options__serach-input" type="text" placeholder="Search..." />
-    <button class="options__add" routerLink="/product">Agregar</button>
+    <app-button text="Agregar" routerLink="/product/add" [type]="typeButton.PRIMARY"></app-button>
   </div>
   <div class="data-table">
     <table class="responsive-table">
@@ -26,8 +26,12 @@
             <div class="dropdown">
               <i class="dropbtn fa-solid fa-ellipsis-vertical"></i>
               <div class="dropdown-content">
-                <a href="#"><i class="fa-solid fa-pen-to-square"></i> Modificar</a>
-                <a href="#"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                <button class="dropdown-content__btn" (click)="editProduct(item)">
+                  <i class="fa-solid fa-pen-to-square"></i> Modificar
+                </button>
+                <button class="dropdown-content__btn" (click)="deleteProduct(item)">
+                  <i class="fa-solid fa-trash"></i> Eliminar
+                </button>
               </div>
             </div>
           </td>

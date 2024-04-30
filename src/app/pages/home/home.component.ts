@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MOCK_RECORDS } from 'src/app/shared/utils/mocks';
-import { IDataRecords } from 'src/app/shared/utils/records.interface';
+import { ProductsService } from 'src/app/services/products/products.service';
+import { IDataRecord } from 'src/app/shared/utils/records.interface';
+import { ETypesButton } from 'src/app/shared/utils/type-button.enum';
 
 @Component({
   selector: 'app-home',
@@ -12,15 +13,34 @@ export class HomeComponent implements OnInit {
   filterQuantityRecords = 5;
   currentPage = 1;
   totalPages = 1;
-  totalData: IDataRecords[] = [];
+  totalData: IDataRecord[] = [];
+  typeButton = ETypesButton;
+  showData: IDataRecord[] = [];
 
-  showData: IDataRecords[] = [];
+  constructor(private productsService: ProductsService) {}
 
   ngOnInit() {
-    this.totalData = MOCK_RECORDS;
-    this.totalRecords = this.totalData.length;
-    this.showData = this.totalData.slice(0, this.filterQuantityRecords);
-    this.calculateTotal();
+    /**
+     * If the ID is empty or has few products, uncomment this line to load products
+     */
+    //this.productsService.pushRandomProducts();
+    this.loadProducts();
+  }
+
+  loadProducts() {
+    this.productsService.getProducts().subscribe({
+      next: (data) => {
+        this.totalData = data;
+        this.totalRecords = this.totalData.length;
+        this.changeQuantityRecords();
+      },
+      error: (error) => {
+        console.error('Error', error);
+      },
+      complete: () => {
+        console.log('Complete');
+      },
+    });
   }
 
   calculateTotal() {
@@ -44,5 +64,25 @@ export class HomeComponent implements OnInit {
       this.currentPage = this.totalPages;
     }
     this.showData = this.totalData.slice(initalIndex, finalIndex);
+  }
+
+  deleteProduct(item: IDataRecord) {
+    console.clear();
+    this.productsService.deleteProduct(item.id).subscribe({
+      next: (data) => {
+        console.log('aca', data);
+        this.loadProducts();
+      },
+      error: (error) => {
+        console.error('Error', error);
+      },
+      complete: () => {
+        console.log('Complete');
+      },
+    });
+  }
+
+  editProduct(item: IDataRecord) {
+    this.productsService.editableProduct$.next(item);
   }
 }

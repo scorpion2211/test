@@ -7,6 +7,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs';
+import { ProductsService } from 'src/app/services/products/products.service';
+import { IDataRecord } from 'src/app/shared/utils/records.interface';
+import { ETypesButton } from 'src/app/shared/utils/type-button.enum';
 
 @Component({
   selector: 'app-product',
@@ -17,25 +21,40 @@ export class ProductComponent implements OnInit {
   productForm!: FormGroup;
   isEditMode = false;
   submitted = false;
+  typeButton = ETypesButton;
+
+  productData: IDataRecord | null = null;
 
   constructor(
+    private productsService: ProductsService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
     this.productForm = this.formBuilder.group({
-      id: [null],
+      id: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
       logo: ['', Validators.required, this.validateURLImage],
       date_release: ['', Validators.required],
       date_revision: ['', Validators.required],
     });
+    this.loadParams();
+  }
 
-    const mode = this.route.snapshot.paramMap.get('mode');
-    if (mode === 'edit') {
+  loadParams() {
+    const action = this.route.snapshot.paramMap.get('action');
+    if (action === 'edit') {
       this.isEditMode = true;
+      if (action) {
+        this.productsService.editableProduct$.pipe(take(1)).subscribe((data) => {
+          if (data) {
+            this.productData = data;
+            this.productForm.patchValue(this.productData);
+          }
+        });
+      }
     }
   }
 
@@ -48,7 +67,7 @@ export class ProductComponent implements OnInit {
     if (this.productForm.invalid) {
       return;
     }
-    console.log(this.productForm.value);
+    this.resetForm();
   }
 
   validateURLImage(control: AbstractControl): Promise<ValidationErrors | null> {
@@ -62,5 +81,14 @@ export class ProductComponent implements OnInit {
         }
       }, 0);
     });
+  }
+
+  resetForm() {
+    this.submitted = false;
+    if (this.isEditMode && this.productData) {
+      this.productForm.patchValue(this.productData);
+      return;
+    }
+    this.productForm.reset();
   }
 }
