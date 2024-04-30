@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
@@ -8,18 +7,15 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () =>
-          import('./pages/home/home.module').then((m) => m.HomeModule),
+        loadChildren: () => import('./pages/home/home.module').then((m) => m.HomeModule),
       },
       {
         path: 'product/:action',
-        loadChildren: () =>
-          import('./pages/product/product.module').then((m) => m.ProductModule),
+        loadChildren: () => import('./pages/product/product.module').then((m) => m.ProductModule),
       },
       {
         path: 'product',
-        loadChildren: () =>
-          import('./pages/product/product.module').then((m) => m.ProductModule),
+        loadChildren: () => import('./pages/product/product.module').then((m) => m.ProductModule),
       },
       {
         path: '',

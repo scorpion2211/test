@@ -15,12 +15,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductComponent implements OnInit {
   productForm!: FormGroup;
-  isEditMode: boolean = false;
-  submitted: boolean = false;
+  isEditMode = false;
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -52,7 +52,7 @@ export class ProductComponent implements OnInit {
   }
 
   validateURLImage(control: AbstractControl): Promise<ValidationErrors | null> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       setTimeout(() => {
         const value = control.value;
         if (value && !/^https?:\/\/.*\.(png|jpg|jpeg|gif|svg)$/i.test(value)) {

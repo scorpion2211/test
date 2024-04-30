@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  TemplateRef,
-} from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { ESizeModal } from '../../utils/modal-size.enum';
 
 @Component({
@@ -13,7 +6,7 @@ import { ESizeModal } from '../../utils/modal-size.enum';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComnponent {
+export class ModalComponent {
   @Input() showModal = false;
   @Input() isCloseable = true;
   @Input() size: string = ESizeModal.MEDIUM;

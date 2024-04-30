@@ -9,13 +9,7 @@ import { HeaderModule } from './shared/components/header/header.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    RouterModule,
-    HttpClientModule,
-    HeaderModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, RouterModule, HttpClientModule, HeaderModule],
   providers: [],
   bootstrap: [AppComponent],
 })
