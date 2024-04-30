@@ -52,4 +52,12 @@ export class ProductsService {
         });
     });
   }
+
+  removeAllProducts(products: IDataRecord[]) {
+    products.forEach((item) => {
+      this.deleteProduct(item.id).subscribe((products) => {
+        console.log(products);
+      });
+    });
+  }
 }

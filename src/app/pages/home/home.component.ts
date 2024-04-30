@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   totalData: IDataRecord[] = [];
   typeButton = ETypesButton;
   showData: IDataRecord[] = [];
+  searchTerm = '';
 
   constructor(private productsService: ProductsService) {}
 
@@ -33,6 +34,11 @@ export class HomeComponent implements OnInit {
         this.totalData = data;
         this.totalRecords = this.totalData.length;
         this.changeQuantityRecords();
+
+        /**
+         * If you want to clear the list for some reason, uncomment the following line
+         */
+        //this.productsService.removeAllProducts(data);
       },
       error: (error) => {
         console.error('Error', error);
@@ -56,6 +62,10 @@ export class HomeComponent implements OnInit {
 
   changeQuantityRecords() {
     this.calculateTotal();
+    const filteredData = this.totalData.filter((item) =>
+      item.name.toLowerCase().includes(this.searchTerm.toLowerCase()),
+    );
+    this.totalRecords = filteredData.length;
     let initalIndex = (this.currentPage - 1) * this.filterQuantityRecords;
     let finalIndex = this.currentPage * this.filterQuantityRecords;
     if (initalIndex >= this.totalRecords) {
@@ -63,7 +73,7 @@ export class HomeComponent implements OnInit {
       finalIndex = this.totalPages * this.filterQuantityRecords;
       this.currentPage = this.totalPages;
     }
-    this.showData = this.totalData.slice(initalIndex, finalIndex);
+    this.showData = filteredData.slice(initalIndex, finalIndex);
   }
 
   deleteProduct(item: IDataRecord) {

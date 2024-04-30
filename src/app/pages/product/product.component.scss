@@ -5,7 +5,16 @@
   max-width: 750px;
   margin: auto;
   background-color: $color-white;
-  padding: 25px;
+  &__title {
+    padding: 35px 25px;
+    text-align: center;
+    font-size: 28px;
+    border-bottom: solid 1px $color-gray;
+  }
+}
+
+.data {
+  padding: 25px 35px 35px;
 }
 
 .form-group {
@@ -37,6 +46,16 @@
 }
 
 @media screen and (max-width: $breackpoint) {
+  .form {
+    &__title {
+      padding: 15px;
+      font-size: 22px;
+    }
+  }
+
+  .data {
+    padding: 25px 35px 25px;
+  }
   .form-group {
     height: 70px;
     &__text-invalid {

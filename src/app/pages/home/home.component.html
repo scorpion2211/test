@@ -1,6 +1,12 @@
 <div class="container">
   <div class="options">
-    <input class="options__serach-input" type="text" placeholder="Search..." />
+    <input
+      class="options__serach-input"
+      type="text"
+      placeholder="Search..."
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="changeQuantityRecords()"
+    />
     <app-button text="Agregar" routerLink="/product/add" [type]="typeButton.PRIMARY"></app-button>
   </div>
   <div class="data-table">
@@ -17,11 +23,11 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of showData">
-          <td class="center-data">{{ item.id }}</td>
+          <td class="center-data"><img class="icon-data" [src]="item.logo" alt="logo" /></td>
           <td>{{ item.name }}</td>
           <td>{{ item.description }}</td>
-          <td>{{ item.date_release }}</td>
-          <td>{{ item.date_revision }}</td>
+          <td>{{ item.date_release | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ item.date_revision | date: 'dd/MM/yyyy' }}</td>
           <td class="center-data">
             <div class="dropdown">
               <i class="dropbtn fa-solid fa-ellipsis-vertical"></i>
