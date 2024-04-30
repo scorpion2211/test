@@ -1,0 +1,166 @@
+@import "../../../styles.scss";
+
+* {
+  color: $color-black-secondary;
+  i {
+    color: $color-gray;
+  }
+}
+
+.container {
+  width: 100%;
+  height: calc(100vh - 78px);
+  background-color: $color-secondary;
+  padding: 80px 50px;
+  &__serach-button {
+    padding: 10px;
+    border-radius: 7px;
+    margin-bottom: 15px;
+  }
+}
+
+.data-table {
+  background-color: $color-white;
+  width: 100%;
+  min-height: 200px;
+  border-radius: 2px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  border: none;
+  border-radius: 2px;
+  white-space: nowrap;
+
+  th,
+  td {
+    border-bottom: 1px solid $color-border;
+    padding: 8px;
+    height: 50px;
+    &.center-data {
+      text-align: center;
+    }
+  }
+
+  th {
+    border-bottom: 1px solid $color-border;
+    background-color: $color-secondary;
+    text-align: left;
+  }
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  &:hover .dropdown-content {
+    display: block;
+  }
+  &-content {
+    display: none;
+    position: fixed;
+    right: 20px;
+    background-color: $color-white;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: left;
+    i {
+      color: $color-black;
+    }
+    a {
+      color: $color-black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      transition: all 0.3s;
+      &:hover {
+        background-color: $color-tertiary;
+      }
+    }
+  }
+}
+
+.dropbtn {
+  color: $color-black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.table-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 20px;
+
+  .right-section,
+  .pagination {
+    display: flex;
+    align-items: center;
+  }
+
+  .right-section {
+    &__select {
+      padding: 5px 15px;
+      border-radius: 5px;
+    }
+  }
+
+  .pagination {
+    margin-right: 10px;
+    * {
+      margin: auto 3px;
+    }
+    &__btn {
+      background-color: $color-white;
+      border: solid 1px $color-gray;
+      padding: 2px;
+      border-radius: 3px;
+      cursor: pointer;
+      i {
+        color: $color-black;
+      }
+      &:disabled {
+        background-color: $color-disabled;
+        cursor: not-allowed;
+        i {
+          color: $color-gray;
+        }
+      }
+    }
+  }
+  .left-section {
+    font-size: 14px;
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    height: calc(100vh - 68px);
+    padding: 40px 20px;
+  }
+  table {
+    font-size: 13px;
+    overflow-x: auto;
+
+    th,
+    td {
+      height: 40px;
+    }
+  }
+
+  .table-footer {
+    .left-section {
+      font-size: 12px;
+      font-weight: bold;
+    }
+  }
+}

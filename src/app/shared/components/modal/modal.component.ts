@@ -6,7 +6,7 @@ import {
   Output,
   TemplateRef,
 } from '@angular/core';
-import { ESizeModal } from '../../utils/modalSize.enum';
+import { ESizeModal } from '../../utils/modal-size.enum';
 
 @Component({
   selector: 'app-modal-ia',

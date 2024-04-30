@@ -1,1 +1,29 @@
-@import "~bootstrap-icons/font/bootstrap-icons.css";
+@font-face {
+  font-family: "Sansation_Regular";
+  src: url("./assets/fonts/Sansation_Regular.ttf") format("opentype");
+}
+
+$color-primary: #23316d;
+$color-secondary: #f4f8ff;
+$color-tertiary: rgb(224, 224, 224);
+$color-white: #fff;
+$color-black: #222;
+$color-black-secondary: #444;
+$color-gray: rgb(139, 139, 139);
+$color-disabled: rgb(235, 235, 235);
+$color-border: rgb(199, 199, 199);
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Sansation_Regular", sans-serif;
+  input,
+  select {
+    border: solid 1px $color-border;
+    outline: none;
+    &:focus {
+      outline: solid 1px $color-gray;
+    }
+  }
+}

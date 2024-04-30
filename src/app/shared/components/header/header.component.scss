@@ -1,0 +1,20 @@
+@import "../../../../styles.scss";
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-white;
+  padding: 25px;
+  color: $color-primary;
+
+  &__title {
+    margin-left: 10px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 15px;
+  }
+}

@@ -1,2 +1,74 @@
-<h1>listado 2</h1>
-<i class="fa-solid fa-user"></i>
+<div class="container">
+  <input class="container__serach-button" type="text" placeholder="Search..." />
+  <div class="data-table">
+    <table class="responsive-table">
+      <thead>
+        <tr>
+          <th class="center-data">Logo</th>
+          <th>Nombre del producto</th>
+          <th>Descripción <i class="fa-solid fa-circle-info"></i></th>
+          <th>Fecha de liberación <i class="fa-solid fa-circle-info"></i></th>
+          <th>
+            Fecha de reestructuración <i class="fa-solid fa-circle-info"></i>
+          </th>
+          <th class="center-data"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of showData">
+          <td class="center-data">{{ item.id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.description }}</td>
+          <td>{{ item.date_release }}</td>
+          <td>{{ item.date_revision }}</td>
+          <td class="center-data">
+            <div class="dropdown">
+              <i class="dropbtn fa-solid fa-ellipsis-vertical"></i>
+              <div class="dropdown-content">
+                <a href="#"
+                  ><i class="fa-solid fa-pen-to-square"></i> Modificar</a
+                >
+                <a href="#"><i class="fa-solid fa-trash"></i> Eliminar</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="table-footer">
+      <section class="left-section">
+        <p>{{ totalRecords }} Resultados</p>
+      </section>
+
+      <section class="right-section">
+        <div class="pagination">
+          <button
+            class="pagination__btn"
+            (click)="changePage(currentPage - 1)"
+            [disabled]="currentPage === 1"
+          >
+            <i class="fa-solid fa-angle-left"></i>
+          </button>
+          <span>{{ currentPage }} de {{ totalPages }}</span>
+          <button
+            class="pagination__btn"
+            (click)="changePage(currentPage + 1)"
+            [disabled]="currentPage === totalPages"
+          >
+            <i class="fa-solid fa-angle-right"></i>
+          </button>
+        </div>
+        <select
+          class="right-section__select"
+          [(ngModel)]="filterQuantityRecords"
+          (ngModelChange)="changeQuantityRecords()"
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+      </section>
+    </div>
+  </div>
+</div>
