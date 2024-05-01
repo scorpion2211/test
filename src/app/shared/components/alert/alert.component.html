@@ -8,7 +8,13 @@
     'alert--error': enumTypes.ERROR === message.type
   }"
 >
-  <button class="alert__button" (click)="hideAlert()">
+  <button
+    class="alert-button"
+    [ngClass]="{
+      'alert-button--warning': enumTypes.WARNING === message.type
+    }"
+    (click)="hideAlert()"
+  >
     <i class="fa-solid fa-xmark"></i>
   </button>
   {{ message.description }}

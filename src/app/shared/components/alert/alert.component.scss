@@ -5,7 +5,7 @@
   top: 20px;
   right: 20px;
   background-color: $color-black;
-  color: white;
+  color: $color-white;
   padding: 15px 20px;
   border-radius: 5px;
   z-index: 9999;
@@ -34,12 +34,15 @@
   &--error {
     background-color: $color-red;
   }
-  &__button {
+  &-button {
     border: none;
     color: $color-white;
     background-color: transparent;
     cursor: pointer;
     margin-right: 10px;
+    &--warning {
+      color: $color-black;
+    }
     i {
       font-size: 18px;
     }
