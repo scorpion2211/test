@@ -22,11 +22,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of showData; trackBy: trackById">
-          <td class="center-data" (click)="itemSelected = item; showModalDescription = true">
+        <tr
+          *ngFor="let item of showData; trackBy: trackById"
+          [attr.id]="item.id"
+          (click)="itemSelected = item; showModalDescription = true"
+        >
+          <td class="center-data">
             <img class="icon-data" [src]="item.logo" alt="logo" />
           </td>
-          <td (click)="itemSelected = item; showModalDescription = true">
+          <td>
             <div class="show-desktop">
               {{ item.name | slice: 0 : 35 }}{{ item.name.length > 50 ? '...' : '' }}
             </div>
@@ -34,7 +38,7 @@
               {{ item.name | slice: 0 : 15 }}{{ item.name.length > 50 ? '...' : '' }}
             </div>
           </td>
-          <td class="description" (click)="itemSelected = item; showModalDescription = true">
+          <td class="description">
             <div class="show-desktop">
               {{ item.description | slice: 0 : 35 }}{{ item.description.length > 50 ? '...' : '' }}
             </div>
@@ -44,20 +48,24 @@
           </td>
           <td>{{ item.date_release | date: 'dd/MM/yyyy' }}</td>
           <td>{{ item.date_revision | date: 'dd/MM/yyyy' }}</td>
-          <td class="center-data" (click)="toggleDropdown($event)">
+          <td
+            class="center-data"
+            tabindex="0"
+            (click)="$event.stopPropagation(); toggleDropdown(item.id)"
+            (blur)="closeDropdown(item.id)"
+          >
             <div class="dropdown">
               <i class="dropbtn fa-solid fa-ellipsis-vertical"></i>
               <div
                 class="dropdown-content"
                 [ngClass]="{
-                  'mobile-open': dropdownOpen,
-                  'dropdown-content--mobile': isMobileDevice
+                  'mobile-open': dropdownStates[item.id]
                 }"
               >
-                <button class="dropdown-content__btn" (click)="editProduct(item)">
+                <button class="dropdown-content__btn" (mousedown)="editProduct(item)">
                   <i class="fa-solid fa-pen-to-square"></i> Modificar
                 </button>
-                <button class="dropdown-content__btn" (click)="selectItem(item)">
+                <button class="dropdown-content__btn" (mousedown)="selectItem(item)">
                   <i class="fa-solid fa-trash"></i> Eliminar
                 </button>
               </div>

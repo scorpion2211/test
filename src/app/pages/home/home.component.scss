@@ -98,22 +98,15 @@ table {
   position: relative;
   display: inline-block;
 
-  &:hover .dropdown-content {
-    display: block;
-  }
   &-content {
     display: none;
     position: fixed;
     right: 20px;
     background-color: $color-white;
     min-width: 160px;
-    margin-top: -7px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     z-index: 1000;
     text-align: left;
-    &--mobile {
-      margin-top: 0;
-    }
     i {
       color: $color-black;
     }
@@ -133,6 +126,10 @@ table {
       }
     }
   }
+}
+
+.mobile-open {
+  display: block;
 }
 
 .dropbtn {
@@ -246,34 +243,6 @@ table {
     .left-section {
       font-size: 12px;
       font-weight: bold;
-    }
-  }
-  .dropdowncontent {
-    margin-top: 0;
-  }
-
-  .description-modal {
-    width: 100%;
-    &__title {
-      font-size: 20px;
-      margin-bottom: 20px;
-    }
-    &__text {
-      margin-bottom: 20px;
-      font-size: 14px;
-    }
-    .date-modal {
-      margin: 0;
-      width: 215px;
-      &__subtitle {
-        font-size: 16px;
-      }
-      p {
-        font-size: 12px;
-      }
-    }
-    .description-date {
-      width: 350px;
     }
   }
 }

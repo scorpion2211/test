@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
   public showModalDescription = false;
   public sizeModal = ESizeModal;
   public isLoadingTable = false;
-  public dropdownOpen = false;
+  public dropdownStates: { [key: string]: boolean } = {};
   public isMobileDevice = false;
 
   private _totalData: IDataRecord[] = [];
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
          */
         setTimeout(() => {
           this.isLoadingTable = false;
-        }, 0);
+        }, 2000);
       },
     });
   }
@@ -165,9 +165,12 @@ export class HomeComponent implements OnInit {
     return item.id;
   }
 
-  toggleDropdown(event: Event): void {
-    event.stopPropagation();
-    this.dropdownOpen = !this.dropdownOpen;
+  toggleDropdown(itemId: string) {
+    this.dropdownStates[itemId] = !this.dropdownStates[itemId];
+  }
+
+  closeDropdown(itemId: string) {
+    this.dropdownStates[itemId] = false;
   }
 
   private detectMobileDevice(): boolean {
