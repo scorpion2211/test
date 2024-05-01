@@ -121,8 +121,9 @@ table {
   .right-section {
     &__select {
       padding: 3px 15px;
-      height: 35px;
+      height: 30px;
       border-radius: 5px;
+      border: solid 1px $color-black;
     }
   }
 
