@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from 'src/app/shared/components/button/button.module';
 import { ModalModule } from 'src/app/shared/components/modal/modal.module';
-import { TableSkeletonModule } from 'src/app/shared/components/table-skeleton/table-skeleton.module';
 import { TableModule } from 'src/app/shared/components/table/table.module';
 
 @NgModule({
