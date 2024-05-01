@@ -127,11 +127,11 @@ export class ProductComponent implements OnInit {
           this.alertService.message$.next(
             this.isEditMode
               ? {
-                  description: `Producto ${name} actualizado`,
+                  description: `Producto ${name} fue actualizado`,
                   type: EAlertType.SUCCESS,
                 }
               : {
-                  description: `Producto ${name} agregado`,
+                  description: `Producto ${name} fue agregado`,
                   type: EAlertType.SUCCESS,
                 },
           );

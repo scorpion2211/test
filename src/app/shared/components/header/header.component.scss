@@ -1,4 +1,4 @@
-@import "../../../../styles.scss";
+@import '../../../../styles.scss';
 
 .header {
   width: 100%;
@@ -11,6 +11,7 @@
 }
 .title {
   margin-left: 10px;
+  font-size: 30px;
   cursor: pointer;
   i {
     margin-right: 10px;
@@ -19,5 +20,8 @@
 @media screen and (max-width: $breackpoint) {
   .header {
     padding: 15px;
+  }
+  .title {
+    font-size: 26px;
   }
 }

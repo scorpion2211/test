@@ -24,7 +24,7 @@
   min-height: 200px;
   border-radius: 2px;
   overflow-y: auto;
-  padding: 10px;
+  padding: 25px;
 }
 
 table {
@@ -120,7 +120,8 @@ table {
 
   .right-section {
     &__select {
-      padding: 5px 15px;
+      padding: 3px 15px;
+      height: 35px;
       border-radius: 5px;
     }
   }
@@ -163,6 +164,9 @@ table {
     &__serach-input {
       width: 220px;
     }
+  }
+  .data-table {
+    padding: 10px;
   }
   table {
     font-size: 13px;
