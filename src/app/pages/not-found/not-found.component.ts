@@ -12,7 +12,7 @@ export class NotFoundComponent {
     this.updateCountdown();
   }
 
-  updateCountdown(): void {
+  private updateCountdown(): void {
     setInterval(() => {
       if (this.secondsLeft === 0) {
         this.router.navigate(['/home']);

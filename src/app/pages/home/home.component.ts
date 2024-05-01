@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/products/products.service';
-import { ESizeModal } from 'src/app/shared/utils/modal-size.enum';
 import { IDataRecord } from 'src/app/shared/utils/records.interface';
-import { ETypesButton } from 'src/app/shared/utils/type-button.enum';
 import { AlertService } from '../../services/alert/alert.service';
 import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
+import { ETypesButton } from 'src/app/shared/utils/type-button.enum';
+import { ESizeModal } from 'src/app/shared/utils/modal-size.enum';
 import { Router } from '@angular/router';
 import { of, switchMap } from 'rxjs';
 import { LoadingService } from 'src/app/services/loading/loading.service';

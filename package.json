@@ -9,6 +9,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:coverage": "ng test --no-watch --code-coverage",
+    "test:coverage-watch": "ng test --code-coverage",
     "test:local": "ng test --browsers Chrome  --code-coverage=true",
     "prettyFix": "prettier --config ./.prettierrc.json --write \"src/**/*.{component.ts,component.css,module.ts,html}\"",
     "lint": "ng lint",
