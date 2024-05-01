@@ -1,0 +1,56 @@
+@import '../../../styles.scss';
+
+.text-shadow {
+  text-shadow:
+    0 0 5px $color-black,
+    0 0 10px $color-black,
+    0 0 20px $color-primary,
+    0 0 30px $color-primary;
+}
+
+.countdown {
+  @extend .text-shadow;
+}
+
+.container {
+  background-image: url(/assets/images/404.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: $color-white;
+  text-align: center;
+  &__title {
+    margin: 0;
+    width: 100%;
+    font-size: 125px;
+    @extend .text-shadow;
+  }
+  &__subtitle {
+    margin: 0;
+    width: 100%;
+    font-size: 85px;
+    @extend .text-shadow;
+  }
+}
+
+@media screen and (max-width: $breackpoint-table) {
+  .container {
+    &__title {
+      font-size: 85px;
+    }
+    &__subtitle {
+      font-size: 55px;
+    }
+  }
+}
+
+@media screen and (max-width: $breackpoint-cel) {
+  .container {
+    &__title {
+      font-size: 65px;
+    }
+    &__subtitle {
+      font-size: 35px;
+    }
+  }
+}

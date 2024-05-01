@@ -10,14 +10,14 @@
   color: $color-primary;
 }
 .title {
-  margin-left: 10px;
+  margin: 0;
   font-size: 30px;
   cursor: pointer;
   i {
     margin-right: 10px;
   }
 }
-@media screen and (max-width: $breackpoint) {
+@media screen and (max-width: $breackpoint-cel) {
   .header {
     padding: 15px;
   }

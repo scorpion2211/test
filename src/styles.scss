@@ -3,7 +3,8 @@
   src: url('./assets/fonts/Sansation_Regular.ttf') format('opentype');
 }
 
-$breackpoint: 768px;
+$breackpoint-table: 1024px;
+$breackpoint-cel: 768px;
 
 $color-primary: rgb(51, 71, 116);
 $color-secondary: #f4f8ff;
@@ -59,7 +60,7 @@ $color-border: rgb(199, 199, 199);
   padding-left: 15px;
 }
 
-@media screen and (max-width: $breackpoint) {
+@media screen and (max-width: $breackpoint-cel) {
   * {
     input,
     select {
@@ -69,7 +70,7 @@ $color-border: rgb(199, 199, 199);
     }
   }
   .container {
-    height: calc(100vh - 68px);
+    height: calc(100vh - 61px);
     padding: 40px 20px;
   }
   .col-md-6 {

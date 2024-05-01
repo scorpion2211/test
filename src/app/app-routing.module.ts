@@ -29,7 +29,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'home',
+    loadChildren: () => import('./pages/not-found/not-found.module').then((m) => m.NotFoundModule),
     pathMatch: 'full',
   },
 ];
