@@ -25,7 +25,7 @@ export class ProductsService {
 
   deleteProduct(id: string) {
     const params = { id };
-    return this.http.delete(`${this.url}${this.path}`, { params });
+    return this.http.delete(`${this.url}${this.path}`, { params, responseType: 'text' });
   }
 
   updateProduct(data: IDataRecord): Observable<IDataRecord> {

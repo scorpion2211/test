@@ -19,7 +19,7 @@
   animation: fadeInLeft 5s ease forwards;
   &:hover {
     cursor: pointer;
-    background-color: #d32f2f;
+    filter: opacity(0.5);
   }
   &--info {
     background-color: $color-primary;

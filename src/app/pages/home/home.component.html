@@ -9,8 +9,8 @@
     />
     <app-button text="Agregar" routerLink="/product/add" [type]="typeButton.PRIMARY"></app-button>
   </div>
-  <div class="data-table">
-    <table class="responsive-table">
+  <div class="data-table" *ngIf="!isLoadingTable; else skeleton">
+    <table class="table">
       <thead>
         <tr>
           <th class="center-data">Logo</th>
@@ -116,3 +116,7 @@
   (clickClose)="showModalConfirm = false"
 >
 </app-modal>
+
+<ng-template #skeleton>
+  <app-table-skeleton></app-table-skeleton>
+</ng-template>

@@ -6,6 +6,7 @@ import { ETypesButton } from 'src/app/shared/utils/type-button.enum';
 import { AlertService } from '../../services/alert/alert.service';
 import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
 import { Router } from '@angular/router';
+import { of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,7 @@ export class HomeComponent implements OnInit {
   public itemSelected: IDataRecord | null = null;
   public showModalConfirm = false;
   public sizeModal = ESizeModal;
+  public isLoadingTable = false;
 
   private _totalData: IDataRecord[] = [];
   constructor(
@@ -40,6 +42,7 @@ export class HomeComponent implements OnInit {
   }
 
   private loadProducts() {
+    this.isLoadingTable = true;
     this.productsService.getProducts().subscribe({
       next: (data) => {
         this._totalData = data;
@@ -59,7 +62,12 @@ export class HomeComponent implements OnInit {
         console.error('Error', error);
       },
       complete: () => {
-        console.log('Complete');
+        /**
+         * A timer is set so that the skeleton for the exercise can be appreciated
+         */
+        setTimeout(() => {
+          this.isLoadingTable = false;
+        }, 2000);
       },
     });
   }
@@ -106,26 +114,41 @@ export class HomeComponent implements OnInit {
   deleteProduct() {
     if (this.itemSelected) {
       const item = { ...this.itemSelected };
-      this.productsService.deleteProduct(item.id).subscribe({
-        next: () => {
-          this.alertService.message$.next({
-            description: `Producto: ${item.name} eliminado`,
-            type: EAlertType.SUCCESS,
-          });
-          this.loadProducts();
-        },
-        error: (error) => {
-          this.alertService.message$.next({
-            description: `Ocurrió un error al eliminar el producto: ${item.name}`,
-            type: EAlertType.ERROR,
-          });
-          console.error('Error', error);
-        },
-        complete: () => {
-          this.itemSelected = null;
-          this.showModalConfirm = false;
-        },
-      });
+      this.productsService
+        .verifyID(item.id)
+        .pipe(
+          switchMap((exist) => {
+            if (exist) {
+              return this.productsService.deleteProduct(item.id);
+            }
+            this.alertService.message$.next({
+              description: `El producto ${item.name} no existe`,
+              type: EAlertType.WARNING,
+            });
+            return of();
+          }),
+        )
+        .subscribe({
+          next: () => {
+            this.alertService.message$.next({
+              description: `Producto ${item.name} eliminado`,
+              type: EAlertType.SUCCESS,
+            });
+            this.loadProducts();
+          },
+          error: (error) => {
+            this.showModalConfirm = false;
+            this.alertService.message$.next({
+              description: `Ocurrió un error al eliminar el producto: ${item.name}`,
+              type: EAlertType.ERROR,
+            });
+            console.error('Error', error);
+          },
+          complete: () => {
+            this.itemSelected = null;
+            this.showModalConfirm = false;
+          },
+        });
     }
   }
 
