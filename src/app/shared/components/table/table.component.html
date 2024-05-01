@@ -1,67 +1,106 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th class="center-data">Logo</th>
-      <th>Nombre del producto</th>
-      <th>Descripción <i class="fa-solid fa-circle-info"></i></th>
-      <th>Fecha de liberación <i class="fa-solid fa-circle-info"></i></th>
-      <th>Fecha de reestructuración <i class="fa-solid fa-circle-info"></i></th>
-      <th class="center-data"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      *ngFor="let item of data; trackBy: trackById"
-      [attr.id]="item.id"
-      (click)="itemSelected = item; showModalDescription = true"
-    >
-      <td class="center-data">
-        <img class="icon-data" [src]="item.logo" alt="logo" />
-      </td>
-      <td>
-        <div class="show-desktop">
-          {{ item.name | slice: 0 : 35 }}{{ item.name.length > 50 ? '...' : '' }}
-        </div>
-        <div class="hiden-desktop">
-          {{ item.name | slice: 0 : 15 }}{{ item.name.length > 50 ? '...' : '' }}
-        </div>
-      </td>
-      <td class="description">
-        <div class="show-desktop">
-          {{ item.description | slice: 0 : 35 }}{{ item.description.length > 50 ? '...' : '' }}
-        </div>
-        <div class="hiden-desktop">
-          {{ item.description | slice: 0 : 15 }}{{ item.description.length > 50 ? '...' : '' }}
-        </div>
-      </td>
-      <td>{{ item.date_release | date: 'dd/MM/yyyy' }}</td>
-      <td>{{ item.date_revision | date: 'dd/MM/yyyy' }}</td>
-      <td
-        class="center-data"
-        tabindex="0"
-        (click)="$event.stopPropagation(); toggleDropdown(item.id)"
-        (blur)="closeDropdown(item.id)"
+<div class="data-table" *ngIf="!isLoadingTable; else skeleton">
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="center-data">Logo</th>
+        <th>Nombre del producto</th>
+        <th>Descripción <i class="fa-solid fa-circle-info"></i></th>
+        <th>Fecha de liberación <i class="fa-solid fa-circle-info"></i></th>
+        <th>Fecha de reestructuración <i class="fa-solid fa-circle-info"></i></th>
+        <th class="center-data"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let item of showData; trackBy: trackById"
+        [attr.id]="item.id"
+        (click)="itemSelected = item; showModalDescription = true"
       >
-        <div class="dropdown">
-          <i class="dropbtn fa-solid fa-ellipsis-vertical"></i>
-          <div
-            class="dropdown-content"
-            [ngClass]="{
-              'mobile-open': dropdownStates[item.id]
-            }"
-          >
-            <button class="dropdown-content__btn" (mousedown)="editProduct.emit(item)">
-              <i class="fa-solid fa-pen-to-square"></i> Modificar
-            </button>
-            <button class="dropdown-content__btn" (mousedown)="deleteProduct.emit(item)">
-              <i class="fa-solid fa-trash"></i> Eliminar
-            </button>
+        <td class="center-data">
+          <img class="icon-data" [src]="item.logo" alt="logo" />
+        </td>
+        <td>
+          <div class="show-desktop">
+            {{ item.name | slice: 0 : 35 }}{{ item.name.length > 50 ? '...' : '' }}
           </div>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+          <div class="hiden-desktop">
+            {{ item.name | slice: 0 : 15 }}{{ item.name.length > 50 ? '...' : '' }}
+          </div>
+        </td>
+        <td class="description">
+          <div class="show-desktop">
+            {{ item.description | slice: 0 : 35 }}{{ item.description.length > 50 ? '...' : '' }}
+          </div>
+          <div class="hiden-desktop">
+            {{ item.description | slice: 0 : 15 }}{{ item.description.length > 50 ? '...' : '' }}
+          </div>
+        </td>
+        <td>{{ item.date_release | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ item.date_revision | date: 'dd/MM/yyyy' }}</td>
+        <td
+          class="center-data"
+          tabindex="0"
+          (click)="$event.stopPropagation(); toggleDropdown(item.id)"
+          (blur)="closeDropdown(item.id)"
+        >
+          <div class="dropdown">
+            <i class="dropbtn fa-solid fa-ellipsis-vertical"></i>
+            <div
+              class="dropdown-content"
+              [ngClass]="{
+                'mobile-open': dropdownStates[item.id]
+              }"
+            >
+              <button class="dropdown-content__btn" (mousedown)="editProduct.emit(item)">
+                <i class="fa-solid fa-pen-to-square"></i> Modificar
+              </button>
+              <button class="dropdown-content__btn" (mousedown)="deleteProduct.emit(item)">
+                <i class="fa-solid fa-trash"></i> Eliminar
+              </button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="table-footer">
+    <section class="left-section">
+      <label for="quantity">{{ totalRecords }} Resultados</label>
+    </section>
+
+    <section class="right-section">
+      <div class="pagination">
+        <button
+          class="pagination__btn"
+          (click)="changePage(currentPage - 1)"
+          [disabled]="currentPage === 1"
+        >
+          <i class="fa-solid fa-angle-left"></i>
+        </button>
+        <span>{{ currentPage }} de {{ totalPages }}</span>
+        <button
+          class="pagination__btn"
+          (click)="changePage(currentPage + 1)"
+          [disabled]="currentPage === totalPages"
+        >
+          <i class="fa-solid fa-angle-right"></i>
+        </button>
+      </div>
+      <select
+        class="right-section__select"
+        id="quantity"
+        [(ngModel)]="filterQuantityRecords"
+        (ngModelChange)="changeQuantityRecords()"
+      >
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+      </select>
+    </section>
+  </div>
+</div>
 
 <app-modal
   [showModal]="showModalDescription"
@@ -93,4 +132,8 @@
       </div>
     </div>
   </div>
+</ng-template>
+
+<ng-template #skeleton>
+  <app-table-skeleton></app-table-skeleton>
 </ng-template>

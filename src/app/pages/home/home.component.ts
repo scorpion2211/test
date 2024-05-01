@@ -14,21 +14,15 @@ import { of, switchMap } from 'rxjs';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public totalRecords = 0;
-  public filterQuantityRecords = 5;
-  public currentPage = 1;
-  public totalPages = 1;
   public typeButton = ETypesButton;
-  public showData: IDataRecord[] = [];
   public searchTerm = '';
   public itemSelected: IDataRecord | null = null;
   public showModalConfirm = false;
   public showModalDescription = false;
   public sizeModal = ESizeModal;
   public isLoadingTable = false;
-  public isMobileDevice = false;
+  public _totalData: IDataRecord[] = [];
 
-  private _totalData: IDataRecord[] = [];
   constructor(
     private productsService: ProductsService,
     private alertService: AlertService,
@@ -48,8 +42,6 @@ export class HomeComponent implements OnInit {
     this.productsService.getProducts().subscribe({
       next: (data) => {
         this._totalData = data;
-        this.totalRecords = this._totalData.length;
-        this.changeQuantityRecords();
 
         /**
          * If you want to clear the list for some reason, uncomment the following line
@@ -72,40 +64,6 @@ export class HomeComponent implements OnInit {
         }, 2000);
       },
     });
-  }
-
-  private calculateTotal() {
-    const value = Math.ceil(this.totalRecords / this.filterQuantityRecords);
-    this.totalPages = value === 0 ? 1 : value;
-  }
-
-  changePage(pagina: number) {
-    if (pagina >= 1 && pagina <= this.totalPages) {
-      this.currentPage = pagina;
-      this.changeQuantityRecords();
-    }
-  }
-
-  changeQuantityRecords() {
-    const filteredData = this.searchTerm
-      ? this._totalData.filter((item) =>
-          item.name.toLowerCase().includes(this.searchTerm.toLowerCase()),
-        )
-      : this._totalData;
-    this.totalRecords = filteredData.length;
-    if (this.totalRecords === 0) {
-      this.currentPage = 1;
-      this.totalPages = 1;
-    }
-    this.calculateTotal();
-    let initalIndex = (this.currentPage - 1) * this.filterQuantityRecords;
-    let finalIndex = this.currentPage * this.filterQuantityRecords;
-    if (initalIndex >= this.totalRecords) {
-      initalIndex = (this.totalPages - 1) * this.filterQuantityRecords;
-      finalIndex = this.totalPages * this.filterQuantityRecords;
-      this.currentPage = this.totalPages;
-    }
-    this.showData = filteredData.slice(initalIndex, finalIndex);
   }
 
   selectItemToBeDeleted(item: IDataRecord) {

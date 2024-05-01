@@ -18,7 +18,6 @@ import { TableModule } from 'src/app/shared/components/table/table.module';
     RouterModule,
     ButtonModule,
     ModalModule,
-    TableSkeletonModule,
     TableModule,
   ],
 })

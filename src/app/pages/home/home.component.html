@@ -5,54 +5,19 @@
       type="text"
       placeholder="Buscar..."
       [(ngModel)]="searchTerm"
-      (ngModelChange)="changeQuantityRecords()"
     />
     <app-button text="Agregar" routerLink="/product/add" [type]="typeButton.PRIMARY"></app-button>
   </div>
-  <div class="data-table" *ngIf="!isLoadingTable; else skeleton">
+  <ng-container>
     <app-table
-      [data]="showData"
+      [_totalData]="_totalData"
+      [searchTerm]="searchTerm"
+      [isLoadingTable]="isLoadingTable"
       (emitterItemSelected)="itemSelected = $event"
       (editProduct)="editProduct($event)"
       (deleteProduct)="selectItemToBeDeleted($event)"
     ></app-table>
-    <div class="table-footer">
-      <section class="left-section">
-        <label for="quantity">{{ totalRecords }} Resultados</label>
-      </section>
-
-      <section class="right-section">
-        <div class="pagination">
-          <button
-            class="pagination__btn"
-            (click)="changePage(currentPage - 1)"
-            [disabled]="currentPage === 1"
-          >
-            <i class="fa-solid fa-angle-left"></i>
-          </button>
-          <span>{{ currentPage }} de {{ totalPages }}</span>
-          <button
-            class="pagination__btn"
-            (click)="changePage(currentPage + 1)"
-            [disabled]="currentPage === totalPages"
-          >
-            <i class="fa-solid fa-angle-right"></i>
-          </button>
-        </div>
-        <select
-          class="right-section__select"
-          id="quantity"
-          [(ngModel)]="filterQuantityRecords"
-          (ngModelChange)="changeQuantityRecords()"
-        >
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-        </select>
-      </section>
-    </div>
-  </div>
+  </ng-container>
 </div>
 
 <ng-template #confirmDelete>
@@ -86,7 +51,3 @@
   (clickClose)="showModalConfirm = false"
 >
 </app-modal>
-
-<ng-template #skeleton>
-  <app-table-skeleton></app-table-skeleton>
-</ng-template>
