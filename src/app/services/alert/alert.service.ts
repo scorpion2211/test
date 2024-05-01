@@ -8,7 +8,7 @@ import { IAlert } from 'src/app/shared/utils/alert.interface';
 })
 export class AlertService {
   public message$ = new BehaviorSubject<IAlert>({
-    description: 'sadasdasd',
+    description: '',
     type: EAlertType.DEFAULT,
   });
 }

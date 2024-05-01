@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { ProductGuard } from './guards/product/product.guard';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
       {
         path: 'product/:action',
         loadChildren: () => import('./pages/product/product.module').then((m) => m.ProductModule),
+        canActivate: [ProductGuard],
       },
       {
         path: 'product',
