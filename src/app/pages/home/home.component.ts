@@ -13,18 +13,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  totalRecords = 0;
-  filterQuantityRecords = 5;
-  currentPage = 1;
-  totalPages = 1;
-  totalData: IDataRecord[] = [];
-  typeButton = ETypesButton;
-  showData: IDataRecord[] = [];
-  searchTerm = '';
-  itemSelected: IDataRecord | null = null;
-  showModalConfirm = false;
-  sizeModal = ESizeModal;
+  public totalRecords = 0;
+  public filterQuantityRecords = 5;
+  public currentPage = 1;
+  public totalPages = 1;
+  public typeButton = ETypesButton;
+  public showData: IDataRecord[] = [];
+  public searchTerm = '';
+  public itemSelected: IDataRecord | null = null;
+  public showModalConfirm = false;
+  public sizeModal = ESizeModal;
 
+  private _totalData: IDataRecord[] = [];
   constructor(
     private productsService: ProductsService,
     private alertService: AlertService,
@@ -39,11 +39,11 @@ export class HomeComponent implements OnInit {
     this.loadProducts();
   }
 
-  loadProducts() {
+  private loadProducts() {
     this.productsService.getProducts().subscribe({
       next: (data) => {
-        this.totalData = data;
-        this.totalRecords = this.totalData.length;
+        this._totalData = data;
+        this.totalRecords = this._totalData.length;
         this.changeQuantityRecords();
 
         /**
@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  calculateTotal() {
+  private calculateTotal() {
     const value = Math.ceil(this.totalRecords / this.filterQuantityRecords);
     this.totalPages = value === 0 ? 1 : value;
   }
@@ -78,10 +78,10 @@ export class HomeComponent implements OnInit {
 
   changeQuantityRecords() {
     const filteredData = this.searchTerm
-      ? this.totalData.filter((item) =>
+      ? this._totalData.filter((item) =>
           item.name.toLowerCase().includes(this.searchTerm.toLowerCase()),
         )
-      : this.totalData;
+      : this._totalData;
     this.totalRecords = filteredData.length;
     if (this.totalRecords === 0) {
       this.currentPage = 1;
