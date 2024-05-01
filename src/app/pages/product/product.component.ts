@@ -67,7 +67,7 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  private loadParams() {
+  loadParams() {
     const action = this.route.snapshot.paramMap.get('action');
     if (action === 'edit') {
       this.isEditMode = true;
@@ -79,7 +79,7 @@ export class ProductComponent implements OnInit {
     this.loadingService.loading$.next(false);
   }
 
-  private loadEditableProduct() {
+  loadEditableProduct() {
     this.productsService.editableProduct$.pipe(take(1)).subscribe((data) => {
       if (data) {
         this._productData = data;
@@ -90,11 +90,11 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  private populateFormWithData(data: IDataRecord) {
+  populateFormWithData(data: IDataRecord) {
     this.productForm.patchValue(data);
   }
 
-  private fixDate(date_release: string, date_revision: string) {
+  fixDate(date_release: string, date_revision: string) {
     const dateReleaseControl = this.productForm.get('date_release');
     const dateRevisionControl = this.productForm.get('date_revision');
     if (dateReleaseControl && dateRevisionControl) {
@@ -130,7 +130,7 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  private editProcut(data: IDataRecord) {
+  editProcut(data: IDataRecord) {
     this.productsService
       .verifyID(data.id)
       .pipe(
@@ -166,7 +166,7 @@ export class ProductComponent implements OnInit {
         },
       });
   }
-  private addProcut(data: IDataRecord) {
+  addProcut(data: IDataRecord) {
     this.productsService
       .verifyID(data.id)
       .pipe(
@@ -203,7 +203,7 @@ export class ProductComponent implements OnInit {
       });
   }
 
-  private validateURLImage(control: AbstractControl): Promise<ValidationErrors | null> {
+  validateURLImage(control: AbstractControl): Promise<ValidationErrors | null> {
     return new Promise((resolve) => {
       setTimeout(() => {
         const value = control.value;
@@ -224,5 +224,9 @@ export class ProductComponent implements OnInit {
       return;
     }
     this.productForm.reset();
+  }
+
+  getProductData(): IDataRecord | null {
+    return this._productData;
   }
 }

@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-import { BehaviorSubject } from 'rxjs';
 import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
 import { IAlert } from 'src/app/shared/utils/alert.interface';
 
