@@ -63,7 +63,6 @@
       </tr>
     </tbody>
   </table>
-
   <div class="table-footer">
     <section class="left-section">
       <label for="quantity">{{ totalRecords }} Resultados</label>
@@ -75,6 +74,7 @@
           class="pagination__btn"
           (click)="changePage(currentPage - 1)"
           [disabled]="currentPage === 1"
+          aria-label="backPage"
         >
           <i class="fa-solid fa-angle-left"></i>
         </button>
@@ -83,6 +83,7 @@
           class="pagination__btn"
           (click)="changePage(currentPage + 1)"
           [disabled]="currentPage === totalPages"
+          aria-label="nextPage"
         >
           <i class="fa-solid fa-angle-right"></i>
         </button>

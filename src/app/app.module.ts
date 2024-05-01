@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HeaderModule } from './shared/components/header/header.module';
 import { HttpInterceptorInterceptor } from './services/interceptor/http-interceptor.interceptor';
 import { AlertModule } from './shared/components/alert/alert.module';
+import { LoadingModule } from './shared/components/loading/loading.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { AlertModule } from './shared/components/alert/alert.module';
     HttpClientModule,
     HeaderModule,
     AlertModule,
+    LoadingModule,
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true }],
   bootstrap: [AppComponent],

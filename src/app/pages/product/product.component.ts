@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { of, switchMap, take } from 'rxjs';
 import { AlertService } from 'src/app/services/alert/alert.service';
+import { LoadingService } from 'src/app/services/loading/loading.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
 import { IDataRecord } from 'src/app/shared/utils/records.interface';
@@ -32,9 +33,11 @@ export class ProductComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private alertService: AlertService,
+    private loadingService: LoadingService,
   ) {}
 
   ngOnInit() {
+    this.loadingService.loading$.next(true);
     this.initializeForm();
     this.loadParams();
   }
@@ -71,7 +74,9 @@ export class ProductComponent implements OnInit {
       if (action) {
         this.loadEditableProduct();
       }
+      return;
     }
+    this.loadingService.loading$.next(false);
   }
 
   private loadEditableProduct() {
@@ -81,6 +86,7 @@ export class ProductComponent implements OnInit {
         this.populateFormWithData(data);
         this.fixDate(this._productData.date_release, this._productData.date_revision);
       }
+      this.loadingService.loading$.next(false);
     });
   }
 
@@ -110,6 +116,7 @@ export class ProductComponent implements OnInit {
     }
     this._productData = this.productForm.value as IDataRecord;
     if (this._productData) {
+      this.loadingService.loading$.next(true);
       if (this.isEditMode) {
         this.editProcut(this._productData);
         return;
@@ -146,6 +153,7 @@ export class ProductComponent implements OnInit {
           });
         },
         error: (error) => {
+          this.loadingService.loading$.next(false);
           this.alertService.message$.next({
             description: `Ocurrió un error al actualizar el producto ${data.name}`,
             type: EAlertType.ERROR,
@@ -154,6 +162,7 @@ export class ProductComponent implements OnInit {
         },
         complete: () => {
           this.resetForm();
+          this.loadingService.loading$.next(false);
         },
       });
   }
@@ -180,6 +189,7 @@ export class ProductComponent implements OnInit {
           });
         },
         error: (error) => {
+          this.loadingService.loading$.next(false);
           this.alertService.message$.next({
             description: `Ocurrió un error al agregar el producto ${data.name}`,
             type: EAlertType.ERROR,
@@ -188,6 +198,7 @@ export class ProductComponent implements OnInit {
         },
         complete: () => {
           this.resetForm();
+          this.loadingService.loading$.next(false);
         },
       });
   }
@@ -208,7 +219,8 @@ export class ProductComponent implements OnInit {
   resetForm() {
     this.submitted = false;
     if (this.isEditMode && this._productData) {
-      this.productForm.patchValue(this._productData);
+      this.populateFormWithData(this._productData);
+      this.fixDate(this._productData.date_release, this._productData.date_revision);
       return;
     }
     this.productForm.reset();

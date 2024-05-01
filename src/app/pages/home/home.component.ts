@@ -7,6 +7,7 @@ import { AlertService } from '../../services/alert/alert.service';
 import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
 import { Router } from '@angular/router';
 import { of, switchMap } from 'rxjs';
+import { LoadingService } from 'src/app/services/loading/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
     private productsService: ProductsService,
     private alertService: AlertService,
     private router: Router,
+    private loadingService: LoadingService,
   ) {}
 
   ngOnInit() {
@@ -73,6 +75,7 @@ export class HomeComponent implements OnInit {
 
   deleteProduct() {
     if (this.itemSelected) {
+      this.loadingService.loading$.next(true);
       const item = { ...this.itemSelected };
       this.productsService
         .verifyID(item.id)
@@ -94,10 +97,12 @@ export class HomeComponent implements OnInit {
               description: `Producto ${item.name} eliminado`,
               type: EAlertType.SUCCESS,
             });
+            this.searchTerm = '';
             this.loadProducts();
           },
           error: (error) => {
             this.showModalConfirm = false;
+            this.loadingService.loading$.next(false);
             this.alertService.message$.next({
               description: `Ocurrió un error al eliminar el producto: ${item.name}`,
               type: EAlertType.ERROR,
@@ -107,6 +112,7 @@ export class HomeComponent implements OnInit {
           complete: () => {
             this.itemSelected = null;
             this.showModalConfirm = false;
+            this.loadingService.loading$.next(false);
           },
         });
     }
