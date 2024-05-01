@@ -7,6 +7,37 @@
   }
 }
 
+.description-modal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &__title {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    img {
+      margin-right: 10px;
+    }
+  }
+  &__text {
+    margin-bottom: 10px;
+  }
+  .date-modal {
+    margin: 0;
+    width: 215px;
+    &__subtitle {
+      font-size: 18px;
+    }
+  }
+  .description-date {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 450px;
+  }
+}
+
 .options {
   display: flex;
   justify-content: space-between;
@@ -35,6 +66,9 @@ table {
   border-radius: 2px;
   white-space: nowrap;
 
+  td {
+    cursor: pointer;
+  }
   th,
   td {
     border-bottom: 1px solid $color-border;
@@ -73,9 +107,13 @@ table {
     right: 20px;
     background-color: $color-white;
     min-width: 160px;
+    margin-top: -7px;
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     z-index: 1000;
     text-align: left;
+    &--mobile {
+      margin-top: 0;
+    }
     i {
       color: $color-black;
     }
@@ -156,6 +194,28 @@ table {
   }
 }
 
+.confirm-delete {
+  background-color: $color-white;
+  border-radius: 10px;
+  &__title {
+    font-size: 22px;
+    padding: 40px 40px 80px;
+    border-bottom: solid 1px $color-gray;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 100%;
+    padding: 25px;
+    app-button {
+      margin: 15px 30px;
+    }
+  }
+}
+
 @media screen and (max-width: $breackpoint-cel) {
   .container {
     height: calc(100vh - 68px);
@@ -188,26 +248,32 @@ table {
       font-weight: bold;
     }
   }
-}
-
-.confirm-delete {
-  background-color: $color-white;
-  border-radius: 10px;
-  &__title {
-    font-size: 22px;
-    padding: 40px 40px 80px;
-    border-bottom: solid 1px $color-gray;
+  .dropdowncontent {
+    margin-top: 0;
   }
 
-  .actions {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: auto;
+  .description-modal {
     width: 100%;
-    padding: 25px;
-    app-button {
-      margin: 15px 30px;
+    &__title {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    &__text {
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    .date-modal {
+      margin: 0;
+      width: 215px;
+      &__subtitle {
+        font-size: 16px;
+      }
+      p {
+        font-size: 12px;
+      }
+    }
+    .description-date {
+      width: 350px;
     }
   }
 }

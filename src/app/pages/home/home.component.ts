@@ -23,8 +23,11 @@ export class HomeComponent implements OnInit {
   public searchTerm = '';
   public itemSelected: IDataRecord | null = null;
   public showModalConfirm = false;
+  public showModalDescription = false;
   public sizeModal = ESizeModal;
   public isLoadingTable = false;
+  public dropdownOpen = false;
+  public isMobileDevice = false;
 
   private _totalData: IDataRecord[] = [];
   constructor(
@@ -38,6 +41,7 @@ export class HomeComponent implements OnInit {
      * If the ID is empty or has few products, uncomment this line to load products
      */
     //this.productsService.pushRandomProducts();
+    this.isMobileDevice = this.detectMobileDevice();
     this.loadProducts();
   }
 
@@ -67,7 +71,7 @@ export class HomeComponent implements OnInit {
          */
         setTimeout(() => {
           this.isLoadingTable = false;
-        }, 2000);
+        }, 0);
       },
     });
   }
@@ -159,5 +163,14 @@ export class HomeComponent implements OnInit {
 
   trackById(index: number, item: IDataRecord): string {
     return item.id;
+  }
+
+  toggleDropdown(event: Event): void {
+    event.stopPropagation();
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  private detectMobileDevice(): boolean {
+    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   }
 }

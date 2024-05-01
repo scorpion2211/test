@@ -23,17 +23,37 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of showData; trackBy: trackById">
-          <td class="center-data">
+          <td class="center-data" (click)="itemSelected = item; showModalDescription = true">
             <img class="icon-data" [src]="item.logo" alt="logo" />
           </td>
-          <td>{{ item.name }}</td>
-          <td>{{ item.description }}</td>
+          <td (click)="itemSelected = item; showModalDescription = true">
+            <div class="show-desktop">
+              {{ item.name | slice: 0 : 35 }}{{ item.name.length > 50 ? '...' : '' }}
+            </div>
+            <div class="hiden-desktop">
+              {{ item.name | slice: 0 : 15 }}{{ item.name.length > 50 ? '...' : '' }}
+            </div>
+          </td>
+          <td class="description" (click)="itemSelected = item; showModalDescription = true">
+            <div class="show-desktop">
+              {{ item.description | slice: 0 : 35 }}{{ item.description.length > 50 ? '...' : '' }}
+            </div>
+            <div class="hiden-desktop">
+              {{ item.description | slice: 0 : 15 }}{{ item.description.length > 50 ? '...' : '' }}
+            </div>
+          </td>
           <td>{{ item.date_release | date: 'dd/MM/yyyy' }}</td>
           <td>{{ item.date_revision | date: 'dd/MM/yyyy' }}</td>
-          <td class="center-data">
+          <td class="center-data" (click)="toggleDropdown($event)">
             <div class="dropdown">
               <i class="dropbtn fa-solid fa-ellipsis-vertical"></i>
-              <div class="dropdown-content">
+              <div
+                class="dropdown-content"
+                [ngClass]="{
+                  'mobile-open': dropdownOpen,
+                  'dropdown-content--mobile': isMobileDevice
+                }"
+              >
                 <button class="dropdown-content__btn" (click)="editProduct(item)">
                   <i class="fa-solid fa-pen-to-square"></i> Modificar
                 </button>
@@ -117,6 +137,38 @@
 >
 </app-modal>
 
+<app-modal
+  [showModal]="showModalDescription"
+  [template]="description"
+  [isCloseable]="true"
+  [size]="sizeModal.MEDIUM"
+  (clickClose)="showModalDescription = false"
+>
+</app-modal>
+
 <ng-template #skeleton>
   <app-table-skeleton></app-table-skeleton>
+</ng-template>
+
+<ng-template #description>
+  <div class="description-modal">
+    <h1 class="description-modal__title">
+      <img class="icon-data" [src]="itemSelected?.logo ?? ''" alt="logo" />
+      {{ itemSelected?.name ?? '' }} - id: {{ itemSelected?.id ?? '' }}
+    </h1>
+    <div class="description-modal__text">{{ itemSelected?.description ?? '' }}</div>
+    <div class="description-date">
+      <div class="date-modal">
+        <h2 class="date-modal__subtitle">Fecha de liberación</h2>
+        <p>{{ itemSelected?.date_release ?? '' | date: 'dd/MM/yyyy' }}</p>
+      </div>
+
+      <div class="date-modal">
+        <h2 class="date-modal__subtitle">Fecha de reestructuración</h2>
+        <p>
+          {{ itemSelected?.date_revision ?? '' | date: 'dd/MM/yyyy' }}
+        </p>
+      </div>
+    </div>
+  </div>
 </ng-template>

@@ -40,6 +40,13 @@ $color-border: rgb(199, 199, 199);
   }
 }
 
+.hiden-desktop {
+  display: none;
+}
+.show-desktop {
+  display: block;
+}
+
 .container {
   width: 100%;
   height: calc(100vh - 78px);
@@ -61,6 +68,15 @@ $color-border: rgb(199, 199, 199);
   padding-left: 15px;
 }
 
+@media screen and (max-width: $breackpoint-table) {
+  .hiden-desktop {
+    display: block;
+  }
+  .show-desktop {
+    display: none;
+  }
+}
+
 @media screen and (max-width: $breackpoint-cel) {
   * {
     input,
@@ -70,6 +86,7 @@ $color-border: rgb(199, 199, 199);
       font-size: 12px;
     }
   }
+
   .container {
     height: calc(100vh - 61px);
     padding: 40px 20px;
