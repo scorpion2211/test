@@ -32,6 +32,16 @@
     margin-top: 5px;
     font-weight: bold;
   }
+  &--disabled {
+    background-color: $color-disabled;
+    color: $color-gray;
+  }
+  &--invalid {
+    border: solid 1px $color-red !important; /*the general input class of styles.scss is overwritten*/
+    &:focus {
+      outline: solid 1px $color-red !important; /*the general input class of styles.scss is overwritten*/
+    }
+  }
 }
 
 .actions {

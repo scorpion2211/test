@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'Sansation_Regular';
   src: url('./assets/fonts/Sansation_Regular.ttf') format('opentype');
+  font-display: swap;
 }
 
 $breackpoint-table: 1024px;
