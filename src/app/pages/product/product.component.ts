@@ -78,14 +78,14 @@ export class ProductComponent implements OnInit {
     this.productsService.editableProduct$.pipe(take(1)).subscribe((data) => {
       if (data) {
         this._productData = data;
-        this.populateFormWithData();
+        this.populateFormWithData(data);
         this.fixDate(this._productData.date_release, this._productData.date_revision);
       }
     });
   }
 
-  private populateFormWithData() {
-    this.productForm.patchValue(this._productData!);
+  private populateFormWithData(data: IDataRecord) {
+    this.productForm.patchValue(data);
   }
 
   private fixDate(date_release: string, date_revision: string) {

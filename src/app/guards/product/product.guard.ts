@@ -13,10 +13,7 @@ export class ProductGuard implements CanActivate {
     private router: Router,
   ) {}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(next: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const action = next.paramMap.get('action');
     if (action === 'edit') {
       return this.productService.editableProduct$.pipe(
