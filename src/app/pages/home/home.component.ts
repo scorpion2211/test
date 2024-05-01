@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
   public showModalDescription = false;
   public sizeModal = ESizeModal;
   public isLoadingTable = false;
-  public dropdownStates: { [key: string]: boolean } = {};
   public isMobileDevice = false;
 
   private _totalData: IDataRecord[] = [];
@@ -41,7 +40,6 @@ export class HomeComponent implements OnInit {
      * If the ID is empty or has few products, uncomment this line to load products
      */
     //this.productsService.pushRandomProducts();
-    this.isMobileDevice = this.detectMobileDevice();
     this.loadProducts();
   }
 
@@ -110,7 +108,7 @@ export class HomeComponent implements OnInit {
     this.showData = filteredData.slice(initalIndex, finalIndex);
   }
 
-  selectItem(item: IDataRecord) {
+  selectItemToBeDeleted(item: IDataRecord) {
     this.itemSelected = item;
     this.showModalConfirm = true;
   }
@@ -159,21 +157,5 @@ export class HomeComponent implements OnInit {
   editProduct(item: IDataRecord) {
     this.productsService.editableProduct$.next(item);
     this.router.navigateByUrl('/product/edit');
-  }
-
-  trackById(index: number, item: IDataRecord): string {
-    return item.id;
-  }
-
-  toggleDropdown(itemId: string) {
-    this.dropdownStates[itemId] = !this.dropdownStates[itemId];
-  }
-
-  closeDropdown(itemId: string) {
-    this.dropdownStates[itemId] = false;
-  }
-
-  private detectMobileDevice(): boolean {
-    return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   }
 }

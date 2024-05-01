@@ -1,0 +1,96 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th class="center-data">Logo</th>
+      <th>Nombre del producto</th>
+      <th>Descripción <i class="fa-solid fa-circle-info"></i></th>
+      <th>Fecha de liberación <i class="fa-solid fa-circle-info"></i></th>
+      <th>Fecha de reestructuración <i class="fa-solid fa-circle-info"></i></th>
+      <th class="center-data"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      *ngFor="let item of data; trackBy: trackById"
+      [attr.id]="item.id"
+      (click)="itemSelected = item; showModalDescription = true"
+    >
+      <td class="center-data">
+        <img class="icon-data" [src]="item.logo" alt="logo" />
+      </td>
+      <td>
+        <div class="show-desktop">
+          {{ item.name | slice: 0 : 35 }}{{ item.name.length > 50 ? '...' : '' }}
+        </div>
+        <div class="hiden-desktop">
+          {{ item.name | slice: 0 : 15 }}{{ item.name.length > 50 ? '...' : '' }}
+        </div>
+      </td>
+      <td class="description">
+        <div class="show-desktop">
+          {{ item.description | slice: 0 : 35 }}{{ item.description.length > 50 ? '...' : '' }}
+        </div>
+        <div class="hiden-desktop">
+          {{ item.description | slice: 0 : 15 }}{{ item.description.length > 50 ? '...' : '' }}
+        </div>
+      </td>
+      <td>{{ item.date_release | date: 'dd/MM/yyyy' }}</td>
+      <td>{{ item.date_revision | date: 'dd/MM/yyyy' }}</td>
+      <td
+        class="center-data"
+        tabindex="0"
+        (click)="$event.stopPropagation(); toggleDropdown(item.id)"
+        (blur)="closeDropdown(item.id)"
+      >
+        <div class="dropdown">
+          <i class="dropbtn fa-solid fa-ellipsis-vertical"></i>
+          <div
+            class="dropdown-content"
+            [ngClass]="{
+              'mobile-open': dropdownStates[item.id]
+            }"
+          >
+            <button class="dropdown-content__btn" (mousedown)="editProduct.emit(item)">
+              <i class="fa-solid fa-pen-to-square"></i> Modificar
+            </button>
+            <button class="dropdown-content__btn" (mousedown)="deleteProduct.emit(item)">
+              <i class="fa-solid fa-trash"></i> Eliminar
+            </button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<app-modal
+  [showModal]="showModalDescription"
+  [template]="description"
+  [isCloseable]="true"
+  [size]="sizeModal.MEDIUM"
+  (clickClose)="showModalDescription = false"
+>
+</app-modal>
+
+<ng-template #description>
+  <div class="description-modal">
+    <h1 class="description-modal__title">
+      <img class="icon-data" [src]="itemSelected?.logo ?? ''" alt="logo" />
+      {{ itemSelected?.name ?? '' }} - id: {{ itemSelected?.id ?? '' }}
+    </h1>
+    <div class="description-modal__text">{{ itemSelected?.description ?? '' }}</div>
+    <div class="description-date">
+      <div class="date-modal">
+        <h2 class="date-modal__subtitle">Fecha de liberación</h2>
+        <p>{{ itemSelected?.date_release ?? '' | date: 'dd/MM/yyyy' }}</p>
+      </div>
+
+      <div class="date-modal">
+        <h2 class="date-modal__subtitle">Fecha de reestructuración</h2>
+        <p>
+          {{ itemSelected?.date_revision ?? '' | date: 'dd/MM/yyyy' }}
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,137 @@
+@import '../../../../styles.scss';
+
+* {
+  color: $color-black-secondary;
+  i {
+    color: $color-gray;
+  }
+}
+.description-modal {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  &__title {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+    img {
+      margin-right: 10px;
+    }
+  }
+  &__text {
+    margin-bottom: 10px;
+  }
+  .date-modal {
+    margin: 0;
+    width: 215px;
+    &__subtitle {
+      font-size: 18px;
+    }
+  }
+  .description-date {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 450px;
+  }
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  border: none;
+  border-radius: 2px;
+  white-space: nowrap;
+
+  td {
+    cursor: pointer;
+  }
+  th,
+  td {
+    border-bottom: 1px solid $color-border;
+    padding: 8px;
+    height: 50px;
+    &.center-data {
+      text-align: center;
+    }
+  }
+
+  th {
+    border-bottom: 1px solid $color-border;
+    background-color: $color-secondary;
+    text-align: left;
+  }
+
+  tr:hover {
+    background-color: $color-tertiary;
+  }
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  &-content {
+    display: none;
+    position: fixed;
+    right: 20px;
+    background-color: $color-white;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: left;
+    i {
+      color: $color-black;
+    }
+    &__btn {
+      display: block;
+      width: 100%;
+      color: $color-black;
+      border: none;
+      background-color: $color-white;
+      padding: 18px 16px;
+      text-align: left;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        background-color: $color-tertiary;
+      }
+    }
+  }
+}
+
+.icon-data {
+  width: 40px;
+}
+
+.mobile-open {
+  display: block;
+}
+
+.dropbtn {
+  color: $color-black;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: $breackpoint-cel) {
+  .data-table {
+    padding: 10px 10px 30px;
+  }
+  table {
+    font-size: 13px;
+    overflow-x: auto;
+
+    th,
+    td {
+      height: 40px;
+    }
+  }
+  .icon-data {
+    width: 30px;
+  }
+}
