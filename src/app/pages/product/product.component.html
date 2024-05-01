@@ -43,8 +43,7 @@
           <div
             *ngIf="
               submitted &&
-              (formControls['date_release'].invalid ||
-                formControls['logo'].errors?.['urlInvalidImage'])
+              (formControls['logo'].invalid || formControls['logo'].errors?.['urlInvalidImage'])
             "
             class="form-group__text-invalid"
           >
@@ -59,7 +58,7 @@
       <div class="row">
         <div class="col-md-6 form-group">
           <label class="form-group__label" for="date_release">Fecha Liberación</label>
-          <input type="text" formControlName="date_release" class="form-group__input" />
+          <input type="date" formControlName="date_release" class="form-group__input" />
           <div
             *ngIf="submitted && formControls['date_release'].invalid"
             class="form-group__text-invalid"
@@ -73,7 +72,13 @@
         </div>
         <div class="col-md-6 form-group">
           <label class="form-group__label" for="date_revision">Fecha Revisión</label>
-          <input type="text" formControlName="date_revision" class="form-group__input" />
+          <input
+            type="date"
+            formControlName="date_revision"
+            class="form-group__input"
+            readonly
+            [disabled]="true"
+          />
         </div>
       </div>
       <div class="actions">
@@ -92,4 +97,7 @@
       </div>
     </form>
   </div>
+  <pre>
+    {{ productForm.value | json }}
+  </pre>
 </div>

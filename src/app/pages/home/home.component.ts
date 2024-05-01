@@ -5,6 +5,7 @@ import { IDataRecord } from 'src/app/shared/utils/records.interface';
 import { ETypesButton } from 'src/app/shared/utils/type-button.enum';
 import { AlertService } from '../../services/alert/alert.service';
 import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private alertService: AlertService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -63,7 +65,8 @@ export class HomeComponent implements OnInit {
   }
 
   calculateTotal() {
-    this.totalPages = Math.ceil(this.totalRecords / this.filterQuantityRecords);
+    const value = Math.ceil(this.totalRecords / this.filterQuantityRecords);
+    this.totalPages = value === 0 ? 1 : value;
   }
 
   changePage(pagina: number) {
@@ -74,11 +77,17 @@ export class HomeComponent implements OnInit {
   }
 
   changeQuantityRecords() {
-    this.calculateTotal();
-    const filteredData = this.totalData.filter((item) =>
-      item.name.toLowerCase().includes(this.searchTerm.toLowerCase()),
-    );
+    const filteredData = this.searchTerm
+      ? this.totalData.filter((item) =>
+          item.name.toLowerCase().includes(this.searchTerm.toLowerCase()),
+        )
+      : this.totalData;
     this.totalRecords = filteredData.length;
+    if (this.totalRecords === 0) {
+      this.currentPage = 1;
+      this.totalPages = 1;
+    }
+    this.calculateTotal();
     let initalIndex = (this.currentPage - 1) * this.filterQuantityRecords;
     let finalIndex = this.currentPage * this.filterQuantityRecords;
     if (initalIndex >= this.totalRecords) {
@@ -122,5 +131,10 @@ export class HomeComponent implements OnInit {
 
   editProduct(item: IDataRecord) {
     this.productsService.editableProduct$.next(item);
+    this.router.navigateByUrl('/product/edit');
+  }
+
+  trackById(index: number, item: IDataRecord): string {
+    return item.id;
   }
 }

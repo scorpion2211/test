@@ -7,7 +7,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 1',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-20',
-    date_revision: '2024-04-01',
+    date_revision: '2025-01-20',
   },
   {
     id: 'cEDIux',
@@ -15,7 +15,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 2',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-14',
-    date_revision: '2024-04-14',
+    date_revision: '2025-02-14',
   },
   {
     id: 'wGXBww',
@@ -23,7 +23,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 3',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-03-29',
-    date_revision: '2024-04-02',
+    date_revision: '2025-03-29',
   },
   {
     id: 'HeFzZb',
@@ -31,7 +31,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 4',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-29',
-    date_revision: '2024-01-31',
+    date_revision: '2025-01-29',
   },
   {
     id: 'PLpMwY',
@@ -39,7 +39,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 5',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-13',
-    date_revision: '2024-03-15',
+    date_revision: '2025-01-13',
   },
   {
     id: 'hVGVTz',
@@ -47,7 +47,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 6',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-13',
-    date_revision: '2024-01-30',
+    date_revision: '2025-02-13',
   },
   {
     id: 'GZFyuo',
@@ -55,7 +55,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 7',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-04-14',
-    date_revision: '2024-03-20',
+    date_revision: '2025-04-14',
   },
   {
     id: 'gfdFiJ',
@@ -63,7 +63,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 8',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-03-20',
-    date_revision: '2024-04-04',
+    date_revision: '2025-03-20',
   },
   {
     id: 'IfCjtP',
@@ -71,7 +71,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 9',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-04-11',
-    date_revision: '2024-01-31',
+    date_revision: '2025-04-11',
   },
   {
     id: 'jFGFUf',
@@ -79,7 +79,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 10',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-03-05',
-    date_revision: '2024-03-24',
+    date_revision: '2025-03-05',
   },
   {
     id: 'iQsUIv',
@@ -87,7 +87,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 11',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-26',
-    date_revision: '2024-03-12',
+    date_revision: '2025-01-26',
   },
   {
     id: 'tPHXYG',
@@ -95,7 +95,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 12',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-29',
-    date_revision: '2024-04-09',
+    date_revision: '2025-02-29',
   },
   {
     id: 'oUdaTG',
@@ -103,7 +103,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 13',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-28',
-    date_revision: '2024-04-21',
+    date_revision: '2025-01-28',
   },
   {
     id: 'WQEABj',
@@ -111,7 +111,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 14',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-28',
-    date_revision: '2024-04-28',
+    date_revision: '2025-02-28',
   },
   {
     id: 'sfiaCv',
@@ -119,7 +119,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 15',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-03-17',
-    date_revision: '2024-04-03',
+    date_revision: '2025-03-17',
   },
   {
     id: 'gCnJpw',
@@ -127,7 +127,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 16',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-03-20',
-    date_revision: '2024-02-16',
+    date_revision: '2025-03-20',
   },
   {
     id: 'dcwvkC',
@@ -135,7 +135,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 17',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-11',
-    date_revision: '2024-01-08',
+    date_revision: '2025-02-11',
   },
   {
     id: 'YBlTqt',
@@ -143,7 +143,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 18',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-08',
-    date_revision: '2024-01-27',
+    date_revision: '2025-01-08',
   },
   {
     id: 'ZxCXvg',
@@ -151,7 +151,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 19',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-04-07',
-    date_revision: '2024-01-27',
+    date_revision: '2025-04-07',
   },
   {
     id: 'UYPvoK',
@@ -159,7 +159,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 20',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-03-17',
-    date_revision: '2024-03-31',
+    date_revision: '2025-03-17',
   },
   {
     id: 'pFPrns',
@@ -167,7 +167,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 21',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-04-09',
-    date_revision: '2024-03-28',
+    date_revision: '2025-04-09',
   },
   {
     id: 'hvNUZE',
@@ -175,7 +175,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 22',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-06',
-    date_revision: '2024-02-04',
+    date_revision: '2025-01-06',
   },
   {
     id: 'gTxASf',
@@ -183,7 +183,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 23',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-04-09',
-    date_revision: '2024-04-01',
+    date_revision: '2025-04-09',
   },
   {
     id: 'WLUnAT',
@@ -191,7 +191,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 24',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-08',
-    date_revision: '2024-02-27',
+    date_revision: '2025-01-08',
   },
   {
     id: 'nsIMcs',
@@ -199,7 +199,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 25',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-04',
-    date_revision: '2024-03-17',
+    date_revision: '2025-02-04',
   },
   {
     id: 'bHjAsI',
@@ -207,7 +207,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 26',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-15',
-    date_revision: '2024-01-25',
+    date_revision: '2025-02-15',
   },
   {
     id: 'tbYBQL',
@@ -215,7 +215,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 27',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-03-29',
-    date_revision: '2024-01-11',
+    date_revision: '2025-03-29',
   },
   {
     id: 'cDEmAt',
@@ -223,7 +223,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 28',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-10',
-    date_revision: '2024-01-06',
+    date_revision: '2025-01-10',
   },
   {
     id: 'gxppji',
@@ -231,7 +231,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 29',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-16',
-    date_revision: '2024-03-23',
+    date_revision: '2025-01-16',
   },
   {
     id: 'bgQODt',
@@ -239,7 +239,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 30',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-04-01',
-    date_revision: '2024-04-16',
+    date_revision: '2025-04-01',
   },
   {
     id: 'AVpLwK',
@@ -247,7 +247,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 31',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-11',
-    date_revision: '2024-03-06',
+    date_revision: '2025-02-11',
   },
   {
     id: 'nFNbRl',
@@ -255,7 +255,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 32',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-19',
-    date_revision: '2024-01-15',
+    date_revision: '2025-01-19',
   },
   {
     id: 'PaMlfX',
@@ -263,7 +263,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 33',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-16',
-    date_revision: '2024-01-07',
+    date_revision: '2025-01-16',
   },
   {
     id: 'vMaAHQ',
@@ -271,7 +271,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 34',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-12',
-    date_revision: '2024-03-05',
+    date_revision: '2025-02-12',
   },
   {
     id: 'qmFmEL',
@@ -279,7 +279,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 35',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-03-04',
-    date_revision: '2024-02-28',
+    date_revision: '2025-03-04',
   },
   {
     id: 'FAkpSP',
@@ -287,7 +287,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 36',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-08',
-    date_revision: '2024-03-18',
+    date_revision: '2025-02-08',
   },
   {
     id: 'YyFAvj',
@@ -295,7 +295,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 37',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-04-26',
-    date_revision: '2024-01-18',
+    date_revision: '2025-04-26',
   },
   {
     id: 'JbyHSQ',
@@ -303,7 +303,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 38',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-16',
-    date_revision: '2024-01-26',
+    date_revision: '2025-02-16',
   },
   {
     id: 'ieiJIt',
@@ -311,7 +311,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 39',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-03-19',
-    date_revision: '2024-01-17',
+    date_revision: '2025-03-19',
   },
   {
     id: 'arRQRp',
@@ -319,7 +319,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 40',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-04-14',
-    date_revision: '2024-04-24',
+    date_revision: '2025-04-14',
   },
   {
     id: 'YwGXHZ',
@@ -327,7 +327,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 41',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-04-24',
-    date_revision: '2024-03-11',
+    date_revision: '2025-04-24',
   },
   {
     id: 'lHpIXH',
@@ -335,7 +335,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 42',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-31',
-    date_revision: '2024-02-05',
+    date_revision: '2025-01-31',
   },
   {
     id: 'ppdqWQ',
@@ -343,7 +343,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 43',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-01-10',
-    date_revision: '2024-02-07',
+    date_revision: '2025-01-10',
   },
   {
     id: 'jksEXD',
@@ -351,7 +351,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 44',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-02',
-    date_revision: '2024-02-11',
+    date_revision: '2025-02-02',
   },
   {
     id: 'UwgyUh',
@@ -359,7 +359,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 45',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-03-01',
-    date_revision: '2024-01-12',
+    date_revision: '2025-03-01',
   },
   {
     id: 'zGWRVY',
@@ -367,7 +367,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 46',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-02-17',
-    date_revision: '2024-01-13',
+    date_revision: '2025-02-17',
   },
   {
     id: 'CSkIUz',
@@ -375,7 +375,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 47',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-03-08',
-    date_revision: '2024-02-22',
+    date_revision: '2025-03-08',
   },
   {
     id: 'umuRmu',
@@ -383,7 +383,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 48',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-04-28',
-    date_revision: '2024-02-26',
+    date_revision: '2025-04-28',
   },
   {
     id: 'mXtPxK',
@@ -391,7 +391,7 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 49',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-03-24',
-    date_revision: '2024-03-13',
+    date_revision: '2025-03-24',
   },
   {
     id: 'kgsJdC',
@@ -399,6 +399,6 @@ export const MOCK_RECORDS: IDataRecord[] = [
     description: 'Descripción 50',
     logo: 'https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png',
     date_release: '2024-04-19',
-    date_revision: '2024-03-11',
+    date_revision: '2025-04-19',
   },
 ];

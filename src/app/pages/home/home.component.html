@@ -3,7 +3,7 @@
     <input
       class="options__serach-input"
       type="text"
-      placeholder="Search..."
+      placeholder="Buscar..."
       [(ngModel)]="searchTerm"
       (ngModelChange)="changeQuantityRecords()"
     />
@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of showData">
+        <tr *ngFor="let item of showData; trackBy: trackById">
           <td class="center-data"><img class="icon-data" [src]="item.logo" alt="logo" /></td>
           <td>{{ item.name }}</td>
           <td>{{ item.description }}</td>
