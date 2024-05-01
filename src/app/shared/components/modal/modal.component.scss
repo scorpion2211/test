@@ -19,7 +19,7 @@
 }
 
 .modal-container {
-  background-color: #fff;
+  background-color: $color-white;
   color: #333;
   min-width: 200px;
   min-height: 250px;
@@ -33,6 +33,10 @@
   align-items: center;
   align-content: center;
   position: relative;
+  &--without-background {
+    background-color: transparent;
+    box-shadow: none;
+  }
 
   &__close {
     padding: 0;
@@ -41,8 +45,9 @@
     border: none;
     font-size: 35px;
     font-weight: bold;
-    color: #333;
+    color: $color-black;
     position: absolute;
+    cursor: pointer;
     top: 7px;
     right: 7px;
   }

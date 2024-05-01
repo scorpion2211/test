@@ -2,6 +2,7 @@
   <div
     class="modal-container"
     [ngClass]="{
+      'modal-container--without-background': removeBackground,
       'modal-size-xs': size === sizeModal.SMALL,
       'modal-size-md': size === sizeModal.MEDIUM,
       'modal-size-xl': size === sizeModal.EXTRALARGE,

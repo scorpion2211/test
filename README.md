@@ -29,3 +29,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Commits
 
 Rules are added to the commit to be approved. You must complicate with the configuration that was added to the ESLint project and then the code will be preformatted automatically using Prettier
+
+## NOTE
+
+FontAwesome icon library is incorporated and a random image from the internet of a box is loaded to represent the product, so the internet was required to run the project

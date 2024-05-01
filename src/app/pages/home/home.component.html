@@ -35,7 +35,7 @@
                 <button class="dropdown-content__btn" (click)="editProduct(item)">
                   <i class="fa-solid fa-pen-to-square"></i> Modificar
                 </button>
-                <button class="dropdown-content__btn" (click)="deleteProduct(item)">
+                <button class="dropdown-content__btn" (click)="selectItem(item)">
                   <i class="fa-solid fa-trash"></i> Eliminar
                 </button>
               </div>
@@ -81,3 +81,35 @@
     </div>
   </div>
 </div>
+
+<ng-template #confirmDelete>
+  <div class="confirm-delete">
+    <h1 class="confirm-delete__title">
+      ¿Estas seguro de eliminar el producto {{ itemSelected?.name }}?
+    </h1>
+
+    <div class="actions">
+      <app-button
+        text="Cancelar"
+        widthButton="220px"
+        [type]="typeButton.SECONDARY"
+        (actionClick)="showModalConfirm = false"
+      ></app-button>
+      <app-button
+        text="Eliminar"
+        widthButton="220px"
+        [type]="typeButton.PRIMARY"
+        (actionClick)="deleteProduct()"
+      ></app-button>
+    </div></div
+></ng-template>
+
+<app-modal
+  [showModal]="showModalConfirm"
+  [template]="confirmDelete"
+  [isCloseable]="false"
+  [removeBackground]="true"
+  [size]="sizeModal.MEDIUM"
+  (clickClose)="showModalConfirm = false"
+>
+</app-modal>

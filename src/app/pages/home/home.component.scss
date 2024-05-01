@@ -183,3 +183,25 @@ table {
     }
   }
 }
+
+.confirm-delete {
+  background-color: $color-white;
+  border-radius: 10px;
+  &__title {
+    font-size: 22px;
+    padding: 40px 40px 80px;
+    border-bottom: solid 1px $color-gray;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: auto;
+    width: 100%;
+    padding: 25px;
+    app-button {
+      margin: 15px 30px;
+    }
+  }
+}

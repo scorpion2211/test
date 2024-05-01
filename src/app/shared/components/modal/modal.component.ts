@@ -2,12 +2,13 @@ import { Component, ElementRef, EventEmitter, Input, Output, TemplateRef } from 
 import { ESizeModal } from '../../utils/modal-size.enum';
 
 @Component({
-  selector: 'app-modal-ia',
+  selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent {
   @Input() showModal = false;
+  @Input() removeBackground = false;
   @Input() isCloseable = true;
   @Input() size: string = ESizeModal.MEDIUM;
   @Input() template!: TemplateRef<ElementRef>;
