@@ -7,10 +7,18 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderModule } from './shared/components/header/header.module';
 import { HttpInterceptorInterceptor } from './services/interceptor/http-interceptor.interceptor';
+import { AlertModule } from './shared/components/alert/alert.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, RouterModule, HttpClientModule, HeaderModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule,
+    HttpClientModule,
+    HeaderModule,
+    AlertModule,
+  ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorInterceptor, multi: true }],
   bootstrap: [AppComponent],
 })

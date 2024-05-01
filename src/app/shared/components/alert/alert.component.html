@@ -1,1 +1,15 @@
-<p>alert works!</p>
+<div
+  class="alert"
+  *ngIf="showAlert"
+  [ngClass]="{
+    'alert--success': enumTypes.SUCCESS === message.type,
+    'alert--warning': enumTypes.WARNING === message.type,
+    'alert--info': enumTypes.INFO === message.type,
+    'alert--error': enumTypes.ERROR === message.type
+  }"
+>
+  <button class="alert__button" (click)="hideAlert()">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  {{ message.description }}
+</div>
