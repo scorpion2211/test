@@ -20,12 +20,12 @@ import { ETypesButton } from 'src/app/shared/utils/type-button.enum';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  productForm!: FormGroup;
-  isEditMode = false;
-  submitted = false;
-  typeButton = ETypesButton;
+  public productForm!: FormGroup;
+  public isEditMode = false;
+  public submitted = false;
+  public typeButton = ETypesButton;
 
-  productData: IDataRecord | null = null;
+  private _productData: IDataRecord | null = null;
 
   constructor(
     private productsService: ProductsService,
@@ -35,11 +35,16 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.initializeForm();
+    this.loadParams();
+  }
+
+  initializeForm() {
     this.productForm = this.formBuilder.group({
       id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
       name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
-      logo: ['', [Validators.required, this.validateURLImage]],
+      logo: ['', Validators.required, this.validateURLImage],
       date_release: ['', Validators.required],
       date_revision: ['', Validators.required],
     });
@@ -57,26 +62,33 @@ export class ProductComponent implements OnInit {
         }
       });
     }
-    this.loadParams();
   }
 
-  loadParams() {
+  private loadParams() {
     const action = this.route.snapshot.paramMap.get('action');
     if (action === 'edit') {
       this.isEditMode = true;
       if (action) {
-        this.productsService.editableProduct$.pipe(take(1)).subscribe((data) => {
-          if (data) {
-            this.productData = data;
-            this.productForm.patchValue(this.productData);
-            this.fixDate(this.productData.date_release, this.productData.date_revision);
-          }
-        });
+        this.loadEditableProduct();
       }
     }
   }
 
-  fixDate(date_release: string, date_revision: string) {
+  private loadEditableProduct() {
+    this.productsService.editableProduct$.pipe(take(1)).subscribe((data) => {
+      if (data) {
+        this._productData = data;
+        this.populateFormWithData();
+        this.fixDate(this._productData.date_release, this._productData.date_revision);
+      }
+    });
+  }
+
+  private populateFormWithData() {
+    this.productForm.patchValue(this._productData!);
+  }
+
+  private fixDate(date_release: string, date_revision: string) {
     const dateReleaseControl = this.productForm.get('date_release');
     const dateRevisionControl = this.productForm.get('date_revision');
     if (dateReleaseControl && dateRevisionControl) {
@@ -96,50 +108,80 @@ export class ProductComponent implements OnInit {
     if (this.productForm.invalid) {
       return;
     }
-    this.productData = this.productForm.value as IDataRecord;
-    const name = this.productData?.name ?? '';
-    const messageProduct = this.isEditMode
-      ? {
-          description: `El producto ${name} no existe`,
-          type: EAlertType.WARNING,
-        }
-      : {
-          description: `El producto ${name} ya existe`,
-          type: EAlertType.WARNING,
-        };
+    this._productData = this.productForm.value as IDataRecord;
+    if (this._productData) {
+      if (this.isEditMode) {
+        this.editProcut(this._productData);
+        return;
+      }
+      this.addProcut(this._productData);
+      return;
+    }
+    this.alertService.message$.next({
+      description: `Ocurrió un error inesperado`,
+      type: EAlertType.ERROR,
+    });
+  }
+
+  private editProcut(data: IDataRecord) {
     this.productsService
-      .verifyID(this.productData.id)
+      .verifyID(data.id)
       .pipe(
         switchMap((exist) => {
-          if (exist && this.isEditMode && this.productData) {
-            return this.productsService.updateProduct(this.productData);
+          if (exist) {
+            return this.productsService.updateProduct(data);
           }
-          if (!exist && !this.isEditMode && this.productData) {
-            return this.productsService.addProduct(this.productData);
-          }
-          this.alertService.message$.next(messageProduct);
+          this.alertService.message$.next({
+            description: `El producto ${data.name} no existe`,
+            type: EAlertType.WARNING,
+          });
           return of();
         }),
       )
       .subscribe({
         next: () => {
-          const name = this.productData?.name ?? '';
-          this.alertService.message$.next(
-            this.isEditMode
-              ? {
-                  description: `Producto ${name} fue actualizado`,
-                  type: EAlertType.SUCCESS,
-                }
-              : {
-                  description: `Producto ${name} fue agregado`,
-                  type: EAlertType.SUCCESS,
-                },
-          );
+          this.alertService.message$.next({
+            description: `Producto ${data.name} fue actualizado`,
+            type: EAlertType.SUCCESS,
+          });
         },
         error: (error) => {
-          const name = this.productData?.name ?? '';
           this.alertService.message$.next({
-            description: `Ocurrió un error al eliminar el producto: ${name}`,
+            description: `Ocurrió un error al actualizar el producto ${data.name}`,
+            type: EAlertType.ERROR,
+          });
+          console.error('Error', error);
+        },
+        complete: () => {
+          this.resetForm();
+        },
+      });
+  }
+  private addProcut(data: IDataRecord) {
+    this.productsService
+      .verifyID(data.id)
+      .pipe(
+        switchMap((exist) => {
+          if (!exist) {
+            return this.productsService.addProduct(data);
+          }
+          this.alertService.message$.next({
+            description: `El producto ${data.name} ya existe`,
+            type: EAlertType.WARNING,
+          });
+          return of();
+        }),
+      )
+      .subscribe({
+        next: () => {
+          this.alertService.message$.next({
+            description: `Producto ${data.name} fue agregado`,
+            type: EAlertType.SUCCESS,
+          });
+        },
+        error: (error) => {
+          this.alertService.message$.next({
+            description: `Ocurrió un error al agregar el producto ${data.name}`,
             type: EAlertType.ERROR,
           });
           console.error('Error', error);
@@ -150,7 +192,7 @@ export class ProductComponent implements OnInit {
       });
   }
 
-  validateURLImage(control: AbstractControl): Promise<ValidationErrors | null> {
+  private validateURLImage(control: AbstractControl): Promise<ValidationErrors | null> {
     return new Promise((resolve) => {
       setTimeout(() => {
         const value = control.value;
@@ -165,8 +207,8 @@ export class ProductComponent implements OnInit {
 
   resetForm() {
     this.submitted = false;
-    if (this.isEditMode && this.productData) {
-      this.productForm.patchValue(this.productData);
+    if (this.isEditMode && this._productData) {
+      this.productForm.patchValue(this._productData);
       return;
     }
     this.productForm.reset();
