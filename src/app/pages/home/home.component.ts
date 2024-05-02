@@ -23,7 +23,8 @@ export class HomeComponent implements OnInit {
   public showModalDescription = false;
   public sizeModal = ESizeModal;
   public isLoadingTable = false;
-  public _totalData: IDataRecord[] = [];
+  public totalProducts = 0;
+  public totalData: IDataRecord[] = [];
 
   constructor(
     private productsService: ProductsService,
@@ -43,8 +44,8 @@ export class HomeComponent implements OnInit {
 
   debuggerActions(clear = false) {
     this.loadingService.loading$.next(true);
-    clear && this._totalData.length > 0
-      ? this.productsService.removeAllProducts(this._totalData)
+    clear && this.totalData.length > 0
+      ? this.productsService.removeAllProducts(this.totalData)
       : this.productsService.pushRandomProducts();
 
     setTimeout(() => {
@@ -60,7 +61,7 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (data) => {
           data = this.sortData(data);
-          this._totalData = data;
+          this.totalData = data;
           this.isLoadingTable = false;
 
           /**

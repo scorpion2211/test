@@ -10,12 +10,8 @@ This project was generated with `Angular CLI` version 15.2.11 and `node version`
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
-
-## Build
-
-- Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
-- Run `npm run build:prod` to build the project for production. The build artifacts will be stored in the `dist/` directory.
+- Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- A button is added in the lower left corner with options to empty and load the list
 
 ## Commits
 
@@ -32,3 +28,8 @@ Rules are added to the commit to be approved. You must complicate with the confi
 - The product search was not specified by which field it should be taken so it will be assumed that it will only search by the product name.
 - It is not specified if the ID can be editable, so the user will not be able to change it. In this way, the problem of if the user changes the ID for that of another product is avoided, which would cause a product to be stepped on and duplicated, losing the previous one.era una simple ppregunta
 - FontAwesome icon library is incorporated and a random image from the internet of a box is loaded to represent the product, so the internet was required to run the project.
+
+## Build
+
+- Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Run `npm run build:prod` to build the project for production. The build artifacts will be stored in the `dist/` directory.

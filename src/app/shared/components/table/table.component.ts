@@ -8,12 +8,13 @@ import { ESizeModal } from '../../utils/modal-size.enum';
   styleUrls: ['./table.component.scss'],
 })
 export class TableComponent implements OnChanges {
-  @Input() _totalData: IDataRecord[] = [];
+  @Input() totalData: IDataRecord[] = [];
   @Input() searchTerm = '';
   @Input() isLoadingTable = true;
   @Output() emitterItemSelected = new EventEmitter<IDataRecord>();
   @Output() editProduct = new EventEmitter<IDataRecord>();
   @Output() deleteProduct = new EventEmitter<IDataRecord>();
+  @Output() emitTotalProducts = new EventEmitter<number>();
 
   public itemSelected: IDataRecord | null = null;
   public showModalDescription = false;
@@ -26,7 +27,7 @@ export class TableComponent implements OnChanges {
   public showData: IDataRecord[] = [];
 
   ngOnChanges(): void {
-    this.totalRecords = this._totalData.length;
+    this.totalRecords = this.totalData.length;
     this.changeQuantityRecords();
   }
 
@@ -61,10 +62,10 @@ export class TableComponent implements OnChanges {
 
   changeQuantityRecords() {
     const filteredData = this.searchTerm
-      ? this._totalData.filter((item) =>
+      ? this.totalData.filter((item) =>
           item.name.toLowerCase().includes(this.searchTerm.toLowerCase()),
         )
-      : this._totalData;
+      : this.totalData;
     this.totalRecords = filteredData.length;
     if (this.totalRecords === 0) {
       this.currentPage = 1;
@@ -79,5 +80,6 @@ export class TableComponent implements OnChanges {
       this.currentPage = this.totalPages;
     }
     this.showData = filteredData.slice(initalIndex, finalIndex);
+    this.emitTotalProducts.emit(this.totalRecords);
   }
 }

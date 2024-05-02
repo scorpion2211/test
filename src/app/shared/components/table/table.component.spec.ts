@@ -76,7 +76,7 @@ describe('TableComponent', () => {
   it('should change page', () => {
     component.totalPages = 5;
     component.currentPage = 1;
-    component._totalData = MOCK_RECORDS;
+    component.totalData = MOCK_RECORDS;
     component.changePage(3);
     expect(component.currentPage).toBe(3);
   });
@@ -102,7 +102,7 @@ describe('TableComponent', () => {
       },
     ];
     component.searchTerm = searchTerm;
-    component._totalData = totalData;
+    component.totalData = totalData;
     component.totalRecords = 2;
     component.currentPage = 2;
     component.totalPages = 1;

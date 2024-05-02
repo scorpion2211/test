@@ -4,3 +4,7 @@ export enum ETypesButton {
   SECONDARY = 'SECONDARY',
   BLACK = 'BLACK',
 }
+export enum ESizeButton {
+  NOMRAL = 'NOMRAL',
+  SMALL = 'SMALL',
+}

@@ -13,7 +13,7 @@ import { LoadingService } from 'src/app/services/loading/loading.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
 import { IDataRecord } from 'src/app/shared/utils/records.interface';
-import { ETypesButton } from 'src/app/shared/utils/type-button.enum';
+import { ESizeButton, ETypesButton } from 'src/app/shared/utils/type-button.enum';
 
 @Component({
   selector: 'app-product',
@@ -25,6 +25,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   public isEditMode = false;
   public submitted = false;
   public typeButton = ETypesButton;
+  public sizeButton = ESizeButton;
 
   private _productData: IDataRecord | null = null;
   subscription = new Subscription();

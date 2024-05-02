@@ -62,7 +62,7 @@ describe('HomeComponent', () => {
     expect(component.showModalDescription).toBeFalsy();
     expect(component.sizeModal).toEqual(ESizeModal);
     expect(component.isLoadingTable).toBeTruthy();
-    expect(component._totalData).toEqual([]);
+    expect(component.totalData).toEqual([]);
   });
 
   it('should select item to be deleted', () => {
@@ -150,7 +150,7 @@ describe('HomeComponent', () => {
     component.loadProducts();
     expect(productsService.getProducts).toHaveBeenCalled();
     tick(3000);
-    expect(component._totalData).toEqual(mockProducts);
+    expect(component.totalData).toEqual(mockProducts);
   }));
 
   it('should handle error when loading products', fakeAsync(() => {
@@ -203,10 +203,10 @@ describe('HomeComponent', () => {
   it('should remove all products', fakeAsync(() => {
     spyOn(productsService, 'removeAllProducts').and.stub();
     const loadinSpy = spyOn(loadingService.loading$, 'next');
-    component._totalData = MOCK_RECORDS;
+    component.totalData = MOCK_RECORDS;
     component.debuggerActions(true);
     expect(loadinSpy).toHaveBeenCalledWith(true);
-    expect(productsService.removeAllProducts).toHaveBeenCalledWith(component._totalData);
+    expect(productsService.removeAllProducts).toHaveBeenCalledWith(component.totalData);
     tick(3000);
     expect(loadinSpy).toHaveBeenCalledWith(false);
   }));

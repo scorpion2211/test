@@ -74,10 +74,6 @@
 }
 
 @media screen and (max-width: $breackpoint-cel) {
-  .container {
-    height: calc(100vh - 68px);
-    padding: 40px 20px;
-  }
   .options {
     &__serach-input {
       width: 220px;

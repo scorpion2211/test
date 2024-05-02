@@ -11,20 +11,22 @@
       class="options__serach-input"
       type="text"
       placeholder="Buscar..."
+      [disabled]="
+        (totalProducts === 0 && totalData.length > 0 && searchTerm === '') || totalData.length === 0
+      "
       [(ngModel)]="searchTerm"
     />
     <app-button text="Agregar" routerLink="/product/add" [type]="typeButton.PRIMARY"></app-button>
   </div>
-  <ng-container>
-    <app-table
-      [_totalData]="_totalData"
-      [searchTerm]="searchTerm"
-      [isLoadingTable]="isLoadingTable"
-      (emitterItemSelected)="itemSelected = $event"
-      (editProduct)="editProduct($event)"
-      (deleteProduct)="selectItemToBeDeleted($event)"
-    ></app-table>
-  </ng-container>
+  <app-table
+    [totalData]="totalData"
+    [searchTerm]="searchTerm"
+    [isLoadingTable]="isLoadingTable"
+    (emitterItemSelected)="itemSelected = $event"
+    (editProduct)="editProduct($event)"
+    (deleteProduct)="selectItemToBeDeleted($event)"
+    (emitTotalProducts)="totalProducts = $event"
+  ></app-table>
 </div>
 
 <ng-template #confirmDelete>
@@ -60,7 +62,7 @@
     </div>
     <div class="actions">
       <app-button
-        [disabled]="_totalData.length === 0"
+        [disabled]="totalData.length === 0"
         text="Vaciar lista"
         widthButton="220px"
         [type]="typeButton.SECONDARY"
@@ -70,7 +72,7 @@
         text="Cargar 50 productos"
         widthButton="220px"
         [type]="typeButton.PRIMARY"
-        (actionClick)="debuggerActions()"
+        (actionClick)="debuggerActions(); showActionsTester = false"
       ></app-button>
       <app-button
         text="Cancelar"

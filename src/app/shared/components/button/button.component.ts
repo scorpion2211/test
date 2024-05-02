@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ETypesButton } from '../../utils/type-button.enum';
+import { ESizeButton, ETypesButton } from '../../utils/type-button.enum';
 
 @Component({
   selector: 'app-button',
@@ -9,10 +9,12 @@ import { ETypesButton } from '../../utils/type-button.enum';
 export class ButtonComponent {
   @Input() text = 'button';
   @Input() disabled = false;
+  @Input() size: ESizeButton = ESizeButton.NOMRAL;
   @Input() type: ETypesButton = ETypesButton.DEFAULT;
   @Input() widthButton = 'auto';
   @Output() actionClick = new EventEmitter();
-  typeButton = ETypesButton;
+  public typeButton = ETypesButton;
+  public sizeButton = ESizeButton;
 
   action() {
     if (!this.disabled) {

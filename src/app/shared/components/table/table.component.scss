@@ -7,6 +7,13 @@
   }
 }
 
+.empty-products {
+  font-size: 24px;
+  text-align: center;
+  width: 100%;
+  margin-top: 15px;
+}
+
 .data-table {
   background-color: $color-white;
   width: 100%;
@@ -56,14 +63,9 @@ table {
   border-radius: 2px;
   white-space: nowrap;
   .action-row {
-    transition: all 0.3s;
-    border: none;
-    background-color: transparent;
-    border-radius: 50%;
-    padding: 4px;
     &:hover {
       background-color: $color-gray;
-      * {
+      .dropbtn {
         color: $color-white;
       }
     }
@@ -211,5 +213,8 @@ table {
       font-size: 12px;
       font-weight: bold;
     }
+  }
+  .empty-products {
+    font-size: 16px;
   }
 }

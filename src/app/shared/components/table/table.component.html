@@ -1,16 +1,14 @@
-<div class="data-table" *ngIf="!isLoadingTable; else skeleton">
+<div class="data-table" *ngIf="!isLoadingTable; else skeleton" style="width: 100%">
   <table class="table">
     <thead>
       <tr>
         <th class="center-data">Logo</th>
         <th>Nombre del producto</th>
-        <th>Descripción <i title="Descripción" class="fa-solid fa-circle-info"></i></th>
-        <th>
-          Fecha de liberación <i title="Fecha de liberación" class="fa-solid fa-circle-info"></i>
-        </th>
+        <th>Descripción <i class="fa-solid fa-circle-info"></i></th>
+        <th>Fecha de liberación <i class="fa-solid fa-circle-info"></i></th>
         <th>
           Fecha de reestructuración
-          <i title="Fecha de reestructuración" class="fa-solid fa-circle-info"></i>
+          <i class="fa-solid fa-circle-info"></i>
         </th>
         <th class="center-data"></th>
       </tr>
@@ -38,16 +36,14 @@
         </td>
         <td>{{ item.date_release | date: 'dd/MM/yyyy' }}</td>
         <td>{{ item.date_revision | date: 'dd/MM/yyyy' }}</td>
-        <td class="center-data">
-          <div
-            class="dropdown"
-            tabindex="0"
-            (click)="$event.stopPropagation(); toggleDropdown(item.id)"
-            (blur)="closeDropdown(item.id)"
-          >
-            <button class="action-row" aria-label="options">
-              <i class="dropbtn fa-solid fa-ellipsis-vertical"></i>
-            </button>
+        <td
+          class="center-data action-row"
+          tabindex="0"
+          (click)="$event.stopPropagation(); toggleDropdown(item.id)"
+          (blur)="closeDropdown(item.id)"
+        >
+          <div class="dropdown">
+            <i class="dropbtn fa-solid fa-ellipsis-vertical"></i>
             <div
               class="dropdown-content"
               [ngClass]="{
@@ -80,6 +76,7 @@
       </tr>
     </tbody>
   </table>
+  <ng-container *ngIf="false; else emptyList"></ng-container>
   <div class="table-footer">
     <section class="left-section">
       <label for="quantity">{{ totalRecords }} Resultados</label>
@@ -128,6 +125,16 @@
   (clickClose)="showModalDescription = false"
 >
 </app-modal>
+
+<ng-template #emptyList>
+  <p class="empty-products" *ngIf="totalRecords === 0 && searchTerm === ''">
+    No contiene elemntos en la lista. Por favor agregue nuevos productos
+  </p>
+  <p class="empty-products" *ngIf="searchTerm !== ''">
+    No se encuentraron productos con "<b>{{ searchTerm }}</b
+    >"
+  </p>
+</ng-template>
 
 <ng-template #description>
   <div class="description-modal">
