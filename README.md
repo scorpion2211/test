@@ -24,6 +24,8 @@ Rules are added to the commit to be approved. You must complicate with the confi
 
 ## Notes
 
+- Navigation buttons are added to the upload/edit form to facilitate user experience and site testing
+- Added "view" action along with "edit" and "delete" because the description and names may be too long to be displayed in the table
 - The exercise will not clarify whether the names of the products can be repeated, so said repetition will be assumed valid.
 - The product search was not specified by which field it should be taken so it will be assumed that it will only search by the product name.
 - It is not specified if the ID can be editable, so the user will not be able to change it. In this way, the problem of if the user changes the ID for that of another product is avoided, which would cause a product to be stepped on and duplicated, losing the previous one.era una simple ppregunta

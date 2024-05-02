@@ -66,7 +66,7 @@
         text="Vaciar lista"
         widthButton="220px"
         [type]="typeButton.SECONDARY"
-        (actionClick)="debuggerActions(true)"
+        (actionClick)="searchTerm = ''; debuggerActions(true)"
       ></app-button>
       <app-button
         text="Cargar 50 productos"

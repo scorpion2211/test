@@ -76,7 +76,7 @@
       </tr>
     </tbody>
   </table>
-  <ng-container *ngIf="false; else emptyList"></ng-container>
+  <ng-container *ngIf="totalRecords !== 0; else emptyList"></ng-container>
   <div class="table-footer">
     <section class="left-section">
       <label for="quantity">{{ totalRecords }} Resultados</label>
@@ -140,7 +140,7 @@
   <div class="description-modal">
     <h1 class="description-modal__title">
       <img class="icon-data" [src]="itemSelected?.logo ?? ''" alt="logo" />
-      {{ itemSelected?.name ?? '' }} - id: {{ itemSelected?.id ?? '' }}
+      {{ itemSelected?.name ?? '' }}
     </h1>
     <div class="description-modal__text">{{ itemSelected?.description ?? '' }}</div>
     <div class="description-date">

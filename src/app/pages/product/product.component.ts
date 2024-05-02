@@ -190,7 +190,7 @@ export class ProductComponent implements OnInit, OnDestroy {
             return this.productsService.addProduct(data).pipe(take(1));
           }
           this.alertService.message$.next({
-            description: `El producto ${data.name} ya existe`,
+            description: `El producto "${data.name}" ya existe con el ID "${data.id}"`,
             type: EAlertType.WARNING,
           });
           return of();
