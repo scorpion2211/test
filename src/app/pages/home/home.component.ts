@@ -40,7 +40,7 @@ export class HomeComponent implements OnInit {
     this.loadProducts();
   }
 
-  private loadProducts() {
+  loadProducts() {
     this.productsService
       .getProducts()
       .pipe(take(1))

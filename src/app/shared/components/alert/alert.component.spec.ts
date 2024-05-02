@@ -44,7 +44,7 @@ describe('AlertComponent', () => {
   });
 
   it('should unsubscribe from alert service on component destruction', () => {
-    spyOn(component.subscribe$, 'unsubscribe');
+    spyOn(component.subscribe$, 'unsubscribe').and.callThrough();
     component.ngOnDestroy();
     expect(component.subscribe$.unsubscribe).toHaveBeenCalled();
   });

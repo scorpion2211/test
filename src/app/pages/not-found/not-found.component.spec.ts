@@ -3,25 +3,16 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
 
 import { NotFoundComponent } from './not-found.component';
-import { ElementRef } from '@angular/core';
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
   let fixture: ComponentFixture<NotFoundComponent>;
   let router: Router;
-  let elementRefMock: Partial<ElementRef>;
 
   beforeEach(async () => {
-    elementRefMock = {
-      nativeElement: {
-        querySelector: jasmine.createSpy().and.returnValue({
-          click: jasmine.createSpy(),
-        }),
-      },
-    };
     await TestBed.configureTestingModule({
       declarations: [NotFoundComponent],
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule.withRoutes([{ path: 'home', component: NotFoundComponent }])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NotFoundComponent);
@@ -33,4 +24,16 @@ describe('NotFoundComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  it('should navigate to home after 5 seconds', fakeAsync(() => {
+    const routerSpy = spyOn(router, 'navigateByUrl').and.callThrough();
+    const updateCountdown = spyOn(component, 'updateCountdown').and.callThrough();
+    component.secondsLeft = 5;
+    component.ngOnInit();
+    expect(updateCountdown).toHaveBeenCalled();
+    tick(6000);
+    expect(component.secondsLeft).toBe(0);
+    expect(routerSpy).toHaveBeenCalledWith('/home');
+
+    component.ngOnDestroy();
+  }));
 });

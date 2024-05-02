@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HomeComponent } from './home.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -14,10 +14,17 @@ import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'src/app/shared/components/button/button.module';
 import { IDataRecord } from 'src/app/shared/utils/records.interface';
 import { MOCK_RECORDS } from 'src/app/shared/utils/mocks';
+import { of, throwError } from 'rxjs';
+import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
+import { Router } from '@angular/router';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
+  let alertService: AlertService;
+  let loadingService: LoadingService;
+  let productsService: ProductsService;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -35,6 +42,10 @@ describe('HomeComponent', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);
+    alertService = TestBed.inject(AlertService);
+    loadingService = TestBed.inject(LoadingService);
+    productsService = TestBed.inject(ProductsService);
+    router = TestBed.inject(Router);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -53,10 +64,106 @@ describe('HomeComponent', () => {
     expect(component.isLoadingTable).toBeTruthy();
     expect(component._totalData).toEqual([]);
   });
+
   it('should select item to be deleted', () => {
     const item: IDataRecord = MOCK_RECORDS[0];
     component.selectItemToBeDeleted(item);
     expect(component.itemSelected).toEqual(item);
     expect(component.showModalConfirm).toBeTrue();
   });
+
+  it('should delete product', () => {
+    const item: IDataRecord = {
+      id: '1',
+      name: 'Product 1',
+      description: 'Description 1',
+      logo: 'logo1.png',
+      date_release: '2024-05-01',
+      date_revision: '2024-05-02',
+    };
+    spyOn(productsService, 'verifyID').and.returnValue(of(true));
+    spyOn(productsService, 'deleteProduct').and.returnValue(of(''));
+    const alertServiceSpy = spyOn(alertService.message$, 'next');
+    const loadingServiceSpy = spyOn(loadingService.loading$, 'next');
+
+    component.itemSelected = item;
+    component.deleteProduct();
+
+    expect(productsService.verifyID).toHaveBeenCalledWith(item.id);
+    expect(productsService.deleteProduct).toHaveBeenCalledWith(item.id);
+    expect(alertServiceSpy).toHaveBeenCalledWith({
+      description: `Producto ${item.name} eliminado`,
+      type: EAlertType.SUCCESS,
+    });
+    expect(component.searchTerm).toEqual('');
+    expect(component.isLoadingTable).toBeTruthy();
+  });
+
+  it('should navigate to edit product', () => {
+    const item: IDataRecord = {
+      id: '1',
+      name: 'Product 1',
+      description: 'Description 1',
+      logo: 'logo1.png',
+      date_release: '2024-05-01',
+      date_revision: '2024-05-02',
+    };
+    const routerSpy = spyOn(router, 'navigateByUrl').and.stub();
+    const editableProductSpy = spyOn(productsService.editableProduct$, 'next').and.stub();
+    component.editProduct(item);
+    expect(editableProductSpy).toHaveBeenCalledWith(item);
+    expect(routerSpy).toHaveBeenCalledWith('/product/edit');
+  });
+
+  it('should handle error when deleting product', () => {
+    const item: IDataRecord = {
+      id: '1',
+      name: 'Product 1',
+      description: 'Description 1',
+      logo: 'logo1.png',
+      date_release: '2024-05-01',
+      date_revision: '2024-05-02',
+    };
+    spyOn(productsService, 'verifyID').and.returnValue(of(true));
+    spyOn(productsService, 'deleteProduct').and.returnValue(throwError('Error'));
+    spyOn(console, 'error');
+    const alertServiceSpy = spyOn(alertService.message$, 'next');
+    const loadingServiceSpy = spyOn(loadingService.loading$, 'next');
+
+    component.itemSelected = item;
+    component.deleteProduct();
+
+    expect(productsService.verifyID).toHaveBeenCalledWith(item.id);
+    expect(productsService.deleteProduct).toHaveBeenCalledWith(item.id);
+    expect(console.error).toHaveBeenCalled();
+    expect(alertServiceSpy).toHaveBeenCalledWith({
+      description: `Ocurrió un error al eliminar el producto: ${item.name}`,
+      type: EAlertType.ERROR,
+    });
+    expect(loadingServiceSpy).toHaveBeenCalledWith(false);
+  });
+
+  it('should load products', fakeAsync(() => {
+    const mockProducts = MOCK_RECORDS.slice(0, 2);
+    spyOn(productsService, 'getProducts').and.returnValue(of(mockProducts));
+    spyOn(productsService, 'removeAllProducts').and.stub();
+    spyOn(alertService.message$, 'next').and.stub();
+    component.loadProducts();
+    expect(productsService.getProducts).toHaveBeenCalled();
+    tick(3000);
+    expect(component._totalData).toEqual(mockProducts);
+  }));
+
+  it('should handle error when loading products', fakeAsync(() => {
+    const mockError = new Error('Failed to load products');
+    spyOn(productsService, 'getProducts').and.returnValue(throwError(mockError));
+    spyOn(alertService.message$, 'next').and.stub();
+    component.loadProducts();
+    expect(productsService.getProducts).toHaveBeenCalled();
+    tick(3000);
+    expect(alertService.message$.next).toHaveBeenCalledWith({
+      description: 'Ocurrió un error al cargar los productos',
+      type: EAlertType.ERROR,
+    });
+  }));
 });
