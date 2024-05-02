@@ -1,22 +1,27 @@
 <div class="container">
-  <div class="extra-options">
-    <button class="extra-options-btn" aria-label="back" routerLink="/home" title="volver al inicio">
-      <i class="fa-solid fa-share"></i>
-      <span class="extra-options-btn__text">volver al inicio</span>
-    </button>
-    <button
-      *ngIf="isEditMode"
-      class="extra-options-btn"
-      aria-label="back"
-      routerLink="/product/add"
-      title="agregar nuevo producto"
-      (click)="productForm.reset(); isEditMode = false"
-    >
-      <span class="extra-options-btn__text">Agregar nuevo producto</span>
-      <i class="fa-solid fa-plus"></i>
-    </button>
-  </div>
   <div class="form">
+    <div class="extra-options">
+      <button
+        class="extra-options-btn"
+        aria-label="back"
+        routerLink="/home"
+        title="volver al inicio"
+      >
+        <i class="fa-solid fa-share"></i>
+        <span class="extra-options-btn__text">volver al inicio</span>
+      </button>
+      <button
+        *ngIf="isEditMode"
+        class="extra-options-btn"
+        aria-label="back"
+        routerLink="/product/add"
+        title="agregar nuevo producto"
+        (click)="productForm.reset(); isEditMode = false"
+      >
+        <span class="extra-options-btn__text">Agregar nuevo producto</span>
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
     <h1 class="form__title">{{ isEditMode ? 'Editar de Registro' : 'Formulario de Registro' }}</h1>
     <form class="data" [formGroup]="productForm">
       <div class="row">

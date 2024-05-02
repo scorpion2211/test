@@ -4,6 +4,7 @@
   width: 100%;
   max-width: 750px;
   margin: auto;
+  position: relative;
   background-color: $color-white;
   &__title {
     padding: 35px 25px;
@@ -14,23 +15,24 @@
 }
 
 .extra-options {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   width: 100%;
   max-width: 750px;
   margin: auto;
+  z-index: 10;
   &-btn {
     border: none;
     width: 30px;
     height: 30px;
-    background-color: $color-tertiary;
+    background-color: $color-white;
     color: $color-black-secondary;
     transition: all 0.3s;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition:
-      width 0.3s,
-      height 0.3s;
 
     &:hover {
       width: 130px;
