@@ -2,7 +2,8 @@
   class="devsu-button"
   [ngClass]="{
     'devsu-button--primary': typeButton.PRIMARY === type,
-    'devsu-button--secondary': typeButton.SECONDARY === type
+    'devsu-button--secondary': typeButton.SECONDARY === type,
+    'devsu-button--black': typeButton.BLACK === type
   }"
   [ngStyle]="{ width: widthButton }"
   [disabled]="disabled"

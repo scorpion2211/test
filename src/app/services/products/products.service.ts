@@ -52,7 +52,7 @@ export class ProductsService {
     });
   }
 
-  removeAllProducts(products: IDataRecord[]) {
+  removeAllProducts(products: IDataRecord[]): void {
     products.forEach((item) => {
       this.deleteProduct(item.id).pipe(take(1)).subscribe();
     });

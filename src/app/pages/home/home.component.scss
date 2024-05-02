@@ -7,6 +7,24 @@
   }
 }
 
+.button-debug {
+  cursor: pointer;
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  padding: 7px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background-color: $color-primary;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+  i {
+    color: $color-white;
+    font-size: 20px;
+  }
+}
+
 .options {
   display: flex;
   justify-content: space-between;
@@ -21,13 +39,25 @@
   width: 40px;
 }
 
-.confirm-delete {
+.confirm-delete,
+.modal-debugger {
   background-color: $color-white;
   border-radius: 10px;
   &__title {
     font-size: 22px;
     padding: 40px 40px 80px;
     border-bottom: solid 1px $color-gray;
+  }
+  &-header {
+    padding: 40px 40px 80px;
+    border-bottom: solid 1px $color-gray;
+    h1 {
+      font-size: 22px;
+      margin: 0 0 10px;
+    }
+    p {
+      font-size: 16px;
+    }
   }
 
   .actions {
@@ -55,5 +85,18 @@
   }
   .icon-data {
     width: 30px;
+  }
+}
+
+/*
+Variable is not used since it is a particular case 
+added for this example as a developer for the interviewer
+*/
+@media screen and (max-width: 1200px) {
+  .modal-debugger {
+    .actions {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 }

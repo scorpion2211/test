@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   public searchTerm = '';
   public itemSelected: IDataRecord | null = null;
   public showModalConfirm = false;
+  public showActionsTester = false;
   public showModalDescription = false;
   public sizeModal = ESizeModal;
   public isLoadingTable = false;
@@ -38,6 +39,19 @@ export class HomeComponent implements OnInit {
     //this.productsService.pushRandomProducts();
     this.isLoadingTable = true;
     this.loadProducts();
+  }
+
+  debuggerActions(clear = false) {
+    this.loadingService.loading$.next(true);
+    setTimeout(() => {
+      this.loadingService.loading$.next(false);
+      window.location.reload();
+    }, 4000);
+    if (clear && this._totalData.length > 0) {
+      this.productsService.removeAllProducts(this._totalData);
+      return;
+    }
+    this.productsService.pushRandomProducts();
   }
 
   loadProducts() {

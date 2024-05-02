@@ -1,4 +1,11 @@
 <div class="container">
+  <button
+    class="button-debug"
+    title="opciones adicionales para testeos"
+    (click)="showActionsTester = true"
+  >
+    <i class="fa-solid fa-bug"></i>
+  </button>
   <div class="options">
     <input
       class="options__serach-input"
@@ -25,7 +32,6 @@
     <h1 class="confirm-delete__title">
       ¿Estas seguro de eliminar el producto {{ itemSelected?.name }}?
     </h1>
-
     <div class="actions">
       <app-button
         text="Cancelar"
@@ -39,9 +45,41 @@
         [type]="typeButton.PRIMARY"
         (actionClick)="deleteProduct()"
       ></app-button>
-    </div></div
-></ng-template>
+    </div>
+  </div>
+</ng-template>
 
+<ng-template #setProducts>
+  <div class="modal-debugger">
+    <div class="modal-debugger-header">
+      <h1>Acciones para Test</h1>
+      <p>
+        Estas opciones fueron agregadas con el fin de hacer pruebas y tener la facilidad de
+        visualizar un lista vacia/cargada
+      </p>
+    </div>
+    <div class="actions">
+      <app-button
+        [disabled]="_totalData.length === 0"
+        text="Vaciar lista"
+        widthButton="220px"
+        [type]="typeButton.SECONDARY"
+        (actionClick)="debuggerActions(true)"
+      ></app-button>
+      <app-button
+        text="Cargar 50 productos"
+        widthButton="220px"
+        [type]="typeButton.PRIMARY"
+        (actionClick)="debuggerActions()"
+      ></app-button>
+      <app-button
+        text="Cancelar"
+        [type]="typeButton.BLACK"
+        (actionClick)="showActionsTester = false"
+      ></app-button>
+    </div>
+  </div>
+</ng-template>
 <app-modal
   [showModal]="showModalConfirm"
   [template]="confirmDelete"
@@ -49,5 +87,15 @@
   [removeBackground]="true"
   [size]="sizeModal.MEDIUM"
   (clickClose)="showModalConfirm = false"
+>
+</app-modal>
+
+<app-modal
+  [showModal]="showActionsTester"
+  [template]="setProducts"
+  [isCloseable]="false"
+  [removeBackground]="true"
+  [size]="sizeModal.MEDIUM"
+  (clickClose)="showActionsTester = false"
 >
 </app-modal>

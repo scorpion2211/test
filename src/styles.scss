@@ -49,7 +49,8 @@ $color-border: rgb(199, 199, 199);
 
 .container {
   width: 100%;
-  min-height: calc(100vh - 78px);
+  height: calc(100vh - 78px);
+  overflow-y: auto;
   background-color: $color-secondary;
   padding: 80px 50px;
 }

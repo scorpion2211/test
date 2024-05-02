@@ -16,6 +16,10 @@
   &--secondary {
     background-color: $color-blue;
   }
+  &--black {
+    background-color: $color-black-secondary;
+    color: $color-white;
+  }
   &:disabled {
     filter: opacity(0.5);
     cursor: not-allowed;
