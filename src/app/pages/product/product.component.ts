@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -7,7 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { of, switchMap, take } from 'rxjs';
+import { Subscription, of, switchMap, take } from 'rxjs';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { LoadingService } from 'src/app/services/loading/loading.service';
 import { ProductsService } from 'src/app/services/products/products.service';
@@ -20,14 +20,14 @@ import { ETypesButton } from 'src/app/shared/utils/type-button.enum';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnDestroy {
   public productForm!: FormGroup;
   public isEditMode = false;
   public submitted = false;
   public typeButton = ETypesButton;
 
   private _productData: IDataRecord | null = null;
-
+  subscription = new Subscription();
   constructor(
     private productsService: ProductsService,
     private formBuilder: FormBuilder,
@@ -35,6 +35,10 @@ export class ProductComponent implements OnInit {
     private alertService: AlertService,
     private loadingService: LoadingService,
   ) {}
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit() {
     this.loadingService.loading$.next(true);
@@ -55,7 +59,7 @@ export class ProductComponent implements OnInit {
     const dateReleaseControl = this.productForm.get('date_release');
     const dateRevisionControl = this.productForm.get('date_revision');
     if (dateReleaseControl && dateRevisionControl) {
-      dateReleaseControl.valueChanges.subscribe((value) => {
+      this.subscription = dateReleaseControl.valueChanges.subscribe((value) => {
         if (value) {
           const releaseDate = new Date(value);
           const revisionDate = new Date(releaseDate);
@@ -134,9 +138,10 @@ export class ProductComponent implements OnInit {
     this.productsService
       .verifyID(data.id)
       .pipe(
+        take(1),
         switchMap((exist) => {
           if (exist) {
-            return this.productsService.updateProduct(data);
+            return this.productsService.updateProduct(data).pipe(take(1));
           }
           this.alertService.message$.next({
             description: `El producto ${data.name} no existe`,
@@ -170,9 +175,10 @@ export class ProductComponent implements OnInit {
     this.productsService
       .verifyID(data.id)
       .pipe(
+        take(1),
         switchMap((exist) => {
           if (!exist) {
-            return this.productsService.addProduct(data);
+            return this.productsService.addProduct(data).pipe(take(1));
           }
           this.alertService.message$.next({
             description: `El producto ${data.name} ya existe`,

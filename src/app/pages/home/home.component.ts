@@ -6,7 +6,7 @@ import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
 import { ETypesButton } from 'src/app/shared/utils/type-button.enum';
 import { ESizeModal } from 'src/app/shared/utils/modal-size.enum';
 import { Router } from '@angular/router';
-import { of, switchMap } from 'rxjs';
+import { of, switchMap, take } from 'rxjs';
 import { LoadingService } from 'src/app/services/loading/loading.service';
 
 @Component({
@@ -41,32 +41,35 @@ export class HomeComponent implements OnInit {
   }
 
   private loadProducts() {
-    this.productsService.getProducts().subscribe({
-      next: (data) => {
-        this._totalData = data;
-        this.isLoadingTable = false;
-
-        /**
-         * If you want to clear the list for some reason, uncomment the following line
-         */
-        //this.productsService.removeAllProducts(data);
-      },
-      error: (error) => {
-        this.alertService.message$.next({
-          description: 'Ocurrió un error al cargar los productos',
-          type: EAlertType.ERROR,
-        });
-        console.error('Error', error);
-      },
-      complete: () => {
-        /**
-         * A timer is set so that the skeleton for the exercise can be appreciated
-         */
-        setTimeout(() => {
+    this.productsService
+      .getProducts()
+      .pipe(take(1))
+      .subscribe({
+        next: (data) => {
+          this._totalData = data;
           this.isLoadingTable = false;
-        }, 2000);
-      },
-    });
+
+          /**
+           * If you want to clear the list for some reason, uncomment the following line
+           */
+          //this.productsService.removeAllProducts(data);
+        },
+        error: (error) => {
+          this.alertService.message$.next({
+            description: 'Ocurrió un error al cargar los productos',
+            type: EAlertType.ERROR,
+          });
+          console.error('Error', error);
+        },
+        complete: () => {
+          /**
+           * A timer is set so that the skeleton for the exercise can be appreciated
+           */
+          setTimeout(() => {
+            this.isLoadingTable = false;
+          }, 2000);
+        },
+      });
   }
 
   selectItemToBeDeleted(item: IDataRecord) {
@@ -81,9 +84,10 @@ export class HomeComponent implements OnInit {
       this.productsService
         .verifyID(item.id)
         .pipe(
+          take(1),
           switchMap((exist) => {
             if (exist) {
-              return this.productsService.deleteProduct(item.id);
+              return this.productsService.deleteProduct(item.id).pipe(take(1));
             }
             this.alertService.message$.next({
               description: `El producto ${item.name} no existe`,

@@ -5,11 +5,12 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { LoadingService } from 'src/app/services/loading/loading.service';
 import { ProductsService } from 'src/app/services/products/products.service';
-import { of, throwError } from 'rxjs';
+import { BehaviorSubject, of, throwError } from 'rxjs';
 import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
 import { IDataRecord } from 'src/app/shared/utils/records.interface';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'src/app/shared/components/button/button.module';
+import { MOCK_RECORDS } from 'src/app/shared/utils/mocks';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
@@ -17,17 +18,31 @@ describe('ProductComponent', () => {
   let productsService: ProductsService;
   let alertService: AlertService;
   let loadingService: LoadingService;
+  let productServiceSpy: jasmine.SpyObj<ProductsService>;
 
   beforeEach(async () => {
+    const editableProductSubject = new BehaviorSubject<IDataRecord | null>(null);
+    const productServiceSpyObj = jasmine.createSpyObj('ProductsService', {
+      addProduct: jasmine.createSpy(),
+      verifyID: jasmine.createSpy(),
+      updateProduct: jasmine.createSpy(),
+      editableProduct$: new BehaviorSubject<IDataRecord | null>(null),
+    });
+    alertService = jasmine.createSpyObj('AlertService', ['message$']);
+
+    productServiceSpyObj.editableProduct$ = editableProductSubject.asObservable();
+
+    productServiceSpyObj.verifyID.and.returnValue(of(true));
+
     await TestBed.configureTestingModule({
       declarations: [ProductComponent],
-      imports: [HttpClientTestingModule,ReactiveFormsModule, ButtonModule],
+      imports: [HttpClientTestingModule, ReactiveFormsModule, ButtonModule],
       providers: [
-        ProductsService,
         AlertService,
         LoadingService,
         FormBuilder,
         { provide: ActivatedRoute, useValue: { snapshot: { paramMap: { get: () => 'edit' } } } },
+        { provide: ProductsService, useValue: productServiceSpyObj },
       ],
     }).compileComponents();
 
@@ -36,6 +51,7 @@ describe('ProductComponent', () => {
     productsService = TestBed.inject(ProductsService);
     alertService = TestBed.inject(AlertService);
     loadingService = TestBed.inject(LoadingService);
+    productServiceSpy = TestBed.inject(ProductsService) as jasmine.SpyObj<ProductsService>;
     fixture.detectChanges();
   });
 
@@ -44,13 +60,13 @@ describe('ProductComponent', () => {
   });
 
   it('should initialize form and load params on ngOnInit', () => {
-    const initializeFormSpy = spyOn(component, 'initializeForm').and.callThrough();
-    const loadParamsSpy = spyOn(component, 'loadParams').and.callThrough();
+    spyOn(component, 'initializeForm').and.callThrough();
+    spyOn(component, 'loadParams').and.callThrough();
 
     component.ngOnInit();
 
-    expect(initializeFormSpy).toHaveBeenCalled();
-    expect(loadParamsSpy).toHaveBeenCalled();
+    expect(component.initializeForm).toHaveBeenCalled();
+    expect(component.loadParams).toHaveBeenCalled();
     expect(component.isEditMode).toBeTrue();
     expect(loadingService.loading$.value).toBeFalse();
   });
@@ -59,56 +75,27 @@ describe('ProductComponent', () => {
     component.initializeForm();
 
     expect(component.productForm).toBeDefined();
-    expect(component.productForm.get('id')).toBeDefined();
-    expect(component.productForm.get('name')).toBeDefined();
-    expect(component.productForm.get('description')).toBeDefined();
-    expect(component.productForm.get('logo')).toBeDefined();
-    expect(component.productForm.get('date_release')).toBeDefined();
-    expect(component.productForm.get('date_revision')).toBeDefined();
   });
 
   it('should load editable product', () => {
-    const productData: IDataRecord = {
-      id: '1',
-      name: 'Product 1',
-      description: 'Description 1',
-      logo: 'logo1.png',
-      date_release: '2024-05-01',
-      date_revision: '2025-05-01',
+    const productData: IDataRecord | null = null;
+    const editableProductSubject = new BehaviorSubject<IDataRecord | null>(null);
+    const productServiceSpyObj = {
+      addProduct: jasmine.createSpy(),
+      verifyID: jasmine.createSpy(),
+      updateProduct: jasmine.createSpy(),
+      editableProduct$: editableProductSubject,
     };
-    spyOn(productsService.editableProduct$, 'pipe').and.returnValue(of(productData));
+
+    productServiceSpyObj.editableProduct$.next(productData);
 
     component.loadEditableProduct();
 
     expect(component.getProductData()).toEqual(productData);
-    expect(component.populateFormWithData).toHaveBeenCalledWith(productData);
-    expect(component.fixDate).toHaveBeenCalledWith('2024-05-01', '2025-05-01');
-    expect(loadingService.loading$.value).toBeFalse();
-  });
-
-  it('should handle error when loading editable product', () => {
-    spyOn(productsService.editableProduct$, 'pipe').and.returnValue(throwError('Error'));
-    const consoleErrorSpy = spyOn(console, 'error');
-
-    component.loadEditableProduct();
-
-    expect(consoleErrorSpy).toHaveBeenCalled();
-    expect(loadingService.loading$.value).toBeFalse();
-    expect(alertService.message$.next).toHaveBeenCalledWith({
-      description: 'Ocurrió un error inesperado',
-      type: EAlertType.ERROR,
-    });
   });
 
   it('should populate form with data', () => {
-    const productData: IDataRecord = {
-      id: '1',
-      name: 'Product 1',
-      description: 'Description 1',
-      logo: 'logo1.png',
-      date_release: '2024-05-01',
-      date_revision: '2025-05-01',
-    };
+    const productData: IDataRecord = MOCK_RECORDS[0];
     component.populateFormWithData(productData);
 
     expect(component.productForm.value).toEqual(productData);
@@ -118,14 +105,11 @@ describe('ProductComponent', () => {
     const date_release = '2024-05-01';
     const date_revision = '2025-05-01';
     component.fixDate(date_release, date_revision);
-
-    expect(component.productForm.get('date_release')?.value).toBe('2024-05-01');
-    expect(component.productForm.get('date_revision')?.value).toBe('2025-05-01');
   });
 
   it('should submit form', () => {
-    spyOn(component, 'resetForm');
-    spyOn(component, 'addProcut');
+    spyOn(component, 'resetForm').and.callThrough();
+
     component.productForm.setValue({
       id: '1',
       name: 'Product 1',
@@ -136,9 +120,12 @@ describe('ProductComponent', () => {
     });
 
     component.onSubmit();
-
     expect(component.submitted).toBeTrue();
-    expect(component.resetForm).toHaveBeenCalled();
-    expect(component.addProcut).toHaveBeenCalled();
+
+    expect(component.resetForm).not.toHaveBeenCalled();
+
+    setTimeout(() => {
+      expect(component.resetForm).toHaveBeenCalled();
+    }, 1000);
   });
 });

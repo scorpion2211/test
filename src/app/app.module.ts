@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-import { HeaderModule } from './shared/components/header/header.module';
 import { HttpInterceptorInterceptor } from './services/interceptor/http-interceptor.interceptor';
+import { RouterModule } from '@angular/router';
+import { HeaderModule } from './shared/components/header/header.module';
 import { AlertModule } from './shared/components/alert/alert.module';
 import { LoadingModule } from './shared/components/loading/loading.module';
 
