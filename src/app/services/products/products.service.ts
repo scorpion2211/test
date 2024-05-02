@@ -36,8 +36,8 @@ export class ProductsService {
     return this.http.post<IDataRecord>(`${this.url}${this.path}`, data);
   }
 
-  pushRandomProducts() {
-    MOCK_RECORDS.forEach((item) => {
+  pushRandomProducts(limit = 50) {
+    MOCK_RECORDS.slice(0, limit).forEach((item) => {
       this.verifyID(item.id)
         .pipe(take(1))
         .pipe(

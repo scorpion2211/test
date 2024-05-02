@@ -43,15 +43,14 @@ export class HomeComponent implements OnInit {
 
   debuggerActions(clear = false) {
     this.loadingService.loading$.next(true);
+    clear && this._totalData.length > 0
+      ? this.productsService.removeAllProducts(this._totalData)
+      : this.productsService.pushRandomProducts();
+
     setTimeout(() => {
       this.loadingService.loading$.next(false);
-      window.location.reload();
-    }, 4000);
-    if (clear && this._totalData.length > 0) {
-      this.productsService.removeAllProducts(this._totalData);
-      return;
-    }
-    this.productsService.pushRandomProducts();
+      this.loadProducts();
+    }, 3000);
   }
 
   loadProducts() {

@@ -189,4 +189,25 @@ describe('HomeComponent', () => {
 
     expect(sortedData).toEqual([MOCK_RECORDS[0], MOCK_RECORDS[0]]);
   });
+
+  it('should set isLoadingTable to false after 4 seconds', fakeAsync(() => {
+    spyOn(productsService, 'pushRandomProducts').and.stub();
+    const loadinSpy = spyOn(loadingService.loading$, 'next');
+    component.debuggerActions();
+    expect(loadinSpy).toHaveBeenCalledWith(true);
+    expect(productsService.pushRandomProducts).toHaveBeenCalledWith();
+    tick(3000);
+    expect(loadinSpy).toHaveBeenCalledWith(false);
+  }));
+
+  it('should remove all products', fakeAsync(() => {
+    spyOn(productsService, 'removeAllProducts').and.stub();
+    const loadinSpy = spyOn(loadingService.loading$, 'next');
+    component._totalData = MOCK_RECORDS;
+    component.debuggerActions(true);
+    expect(loadinSpy).toHaveBeenCalledWith(true);
+    expect(productsService.removeAllProducts).toHaveBeenCalledWith(component._totalData);
+    tick(3000);
+    expect(loadinSpy).toHaveBeenCalledWith(false);
+  }));
 });

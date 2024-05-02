@@ -4,7 +4,8 @@ import { ProductGuard } from './product.guard';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { IDataRecord } from 'src/app/shared/utils/records.interface';
 
 describe('ProductGuard', () => {
   let guard: ProductGuard;
@@ -41,6 +42,7 @@ describe('ProductGuard', () => {
       },
     } as unknown as ActivatedRouteSnapshot;
     spyOn(router, 'navigate');
+    productsService.editableProduct$ = new BehaviorSubject<IDataRecord | null>(null);
     spyOn(productsService.editableProduct$, 'pipe').and.returnValue(of(null));
 
     const canActivateResult = guard.canActivate(snapshot);
