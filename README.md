@@ -2,6 +2,12 @@
 
 This project was generated with `Angular CLI` version 15.2.11 and `node version` 20.11.0
 
+## Install dependencies
+
+- Run the `npm i` command
+- If the `npm i` command ends with errors please run it again or run `npm run reinstall` from a linux terminal
+- If you want, you can run `npm run clean` to clean the npm cache and libraries. At the end run `npm i` again
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
