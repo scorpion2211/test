@@ -187,6 +187,7 @@ export class ProductComponent implements OnInit {
             description: `Producto ${data.name} fue agregado`,
             type: EAlertType.SUCCESS,
           });
+          this.resetForm();
         },
         error: (error) => {
           this.loadingService.loading$.next(false);
@@ -197,7 +198,6 @@ export class ProductComponent implements OnInit {
           console.error('Error', error);
         },
         complete: () => {
-          this.resetForm();
           this.loadingService.loading$.next(false);
         },
       });

@@ -114,7 +114,7 @@ describe('HomeComponent', () => {
       date_revision: '2024-05-02',
     };
     spyOn(productsService, 'verifyID').and.returnValue(of(true));
-    spyOn(productsService, 'deleteProduct').and.returnValue(of(null));
+    spyOn(productsService, 'deleteProduct').and.returnValue(of(''));
     spyOn(alertService.message$, 'next');
     spyOn(loadingService.loading$, 'next');
 

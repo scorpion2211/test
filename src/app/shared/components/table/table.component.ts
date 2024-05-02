@@ -47,7 +47,7 @@ export class TableComponent implements OnChanges {
     this.emitterItemSelected.emit(item);
   }
 
-  private calculateTotal() {
+  calculateTotal() {
     const value = Math.ceil(this.totalRecords / this.filterQuantityRecords);
     this.totalPages = value === 0 ? 1 : value;
   }
