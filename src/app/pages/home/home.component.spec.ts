@@ -166,4 +166,28 @@ describe('HomeComponent', () => {
       type: EAlertType.ERROR,
     });
   }));
+
+  it('should sort data alphabetically by name when it equals', () => {
+    const testData = MOCK_RECORDS.slice(0, 3);
+
+    const sortedData = component.sortData(testData);
+
+    expect(sortedData).toEqual(MOCK_RECORDS.slice(0, 3));
+  });
+
+  it('should sort data alphabetically by name', () => {
+    const testData = MOCK_RECORDS.slice(0, 3).reverse();
+
+    const sortedData = component.sortData(testData);
+
+    expect(sortedData).toEqual(MOCK_RECORDS.slice(0, 3));
+  });
+
+  it('should sort data alphabetically by name and contina equals elements', () => {
+    const testData = [MOCK_RECORDS[0], MOCK_RECORDS[0]];
+
+    const sortedData = component.sortData(testData);
+
+    expect(sortedData).toEqual([MOCK_RECORDS[0], MOCK_RECORDS[0]]);
+  });
 });

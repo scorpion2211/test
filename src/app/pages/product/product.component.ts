@@ -48,7 +48,15 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   initializeForm() {
     this.productForm = this.formBuilder.group({
-      id: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      id: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(10),
+          Validators.pattern(/^[^\s]+$/),
+        ],
+      ],
       name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]],
       logo: ['', Validators.required, this.validateURLImage],

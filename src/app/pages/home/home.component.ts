@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit {
       .pipe(take(1))
       .subscribe({
         next: (data) => {
+          data = this.sortData(data);
           this._totalData = data;
           this.isLoadingTable = false;
 
@@ -70,6 +71,21 @@ export class HomeComponent implements OnInit {
           }, 2000);
         },
       });
+  }
+
+  sortData(data: IDataRecord[]) {
+    return data.sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
   }
 
   selectItemToBeDeleted(item: IDataRecord) {

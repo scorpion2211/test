@@ -7,14 +7,30 @@
           <label class="form-group__label" for="id">ID</label>
           <input
             id="id"
+            class="form-group__input"
+            [ngClass]="{
+              'form-group--disabled': isEditMode,
+              'form-group--invalid': submitted && formControls['id'].invalid
+            }"
+            [disabled]="isEditMode"
+            [readOnly]="isEditMode"
             type="text"
             formControlName="id"
-            class="form-group__input"
-            [ngClass]="{ 'form-group--invalid': submitted && formControls['id'].invalid }"
             maxlength="10"
+            pattern="[A-Za-z-]+(-[A-Za-z-]+)*"
           />
           <div *ngIf="submitted && formControls['id'].invalid" class="form-group__text-invalid">
-            {{ formControls['id'].value === '' ? 'Este campo es requerido' : 'ID no válido' }}
+            {{
+              formControls['id'].value === ''
+                ? 'Este campo es requerido'
+                : formControls['id'].errors?.['minlength']
+                  ? 'ID debe tener al menos 3 caracteres.'
+                  : formControls['id'].errors?.['maxlength']
+                    ? 'ID debe tener máximo 10 caracteres.'
+                    : formControls['id'].errors?.['pattern']
+                      ? 'ID no puede contener espacios'
+                      : 'ID no válido'
+            }}
           </div>
         </div>
         <div class="col-md-6 form-group">
@@ -28,7 +44,13 @@
             maxlength="100"
           />
           <div *ngIf="submitted && formControls['name'].invalid" class="form-group__text-invalid">
-            {{ formControls['name'].value === '' ? 'Este campo es requerido' : 'Nombre no válido' }}
+            {{
+              formControls['name'].value === ''
+                ? 'Este campo es requerido'
+                : formControls['name'].errors?.['minlength']
+                  ? 'El nombre debe tener al menos 5 caracteres.'
+                  : 'Nombre no válido'
+            }}
           </div>
         </div>
       </div>
@@ -49,7 +71,9 @@
             {{
               formControls['description'].value === ''
                 ? 'Este campo es requerido'
-                : 'Description no válida'
+                : formControls['description'].errors?.['minlength']
+                  ? 'La descripción debe tener al menos 10 caracteres.'
+                  : 'Descripción no válida'
             }}
           </div>
         </div>
@@ -76,7 +100,7 @@
             {{
               formControls['logo'].value === ''
                 ? 'Este campo es requerido'
-                : 'URL de imagen no válida'
+                : 'URL de imágen no válida'
             }}
           </div>
         </div>
