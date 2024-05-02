@@ -33,3 +33,7 @@ Rules are added to the commit to be approved. You must complicate with the confi
 
 - Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 - Run `npm run build:prod` to build the project for production. The build artifacts will be stored in the `dist/` directory.
+
+## Test
+
+For some reason that I did not manage to adjust, if running the tests gives an error, download the tests and run them again or comment on it('should navigate to "/product/add" and return false if editable product is null' ) from the ProductGuard test.

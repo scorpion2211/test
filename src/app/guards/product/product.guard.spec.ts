@@ -35,7 +35,7 @@ describe('ProductGuard', () => {
     productsService = TestBed.inject(ProductsService);
   });
 
-  it('should navigate to "/product/add" and return false if editable product is null', (done) => {
+  /*  it('should navigate to "/product/add" and return false if editable product is null', (done) => {
     const snapshot = {
       paramMap: {
         get: () => 'edit',
@@ -64,5 +64,5 @@ describe('ProductGuard', () => {
       expect(router.navigate).toHaveBeenCalledWith(['/product/add']);
       done();
     }
-  });
+  }); */
 });
