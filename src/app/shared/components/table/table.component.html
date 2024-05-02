@@ -16,11 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr
-        *ngFor="let item of showData; trackBy: trackById"
-        [attr.id]="item.id"
-        (click)="itemSelected = item; showModalDescription = true"
-      >
+      <tr *ngFor="let item of showData; trackBy: trackById" [attr.id]="item.id">
         <td class="center-data">
           <img class="icon-data" [src]="item.logo" alt="logo" />
         </td>
@@ -42,25 +38,41 @@
         </td>
         <td>{{ item.date_release | date: 'dd/MM/yyyy' }}</td>
         <td>{{ item.date_revision | date: 'dd/MM/yyyy' }}</td>
-        <td
-          class="center-data"
-          tabindex="0"
-          (click)="$event.stopPropagation(); toggleDropdown(item.id)"
-          (blur)="closeDropdown(item.id)"
-        >
-          <div class="dropdown">
-            <i class="dropbtn fa-solid fa-ellipsis-vertical"></i>
+        <td class="center-data">
+          <div
+            class="dropdown"
+            tabindex="0"
+            (click)="$event.stopPropagation(); toggleDropdown(item.id)"
+            (blur)="closeDropdown(item.id)"
+          >
+            <button class="action-row" aria-label="options">
+              <i class="dropbtn fa-solid fa-ellipsis-vertical"></i>
+            </button>
             <div
               class="dropdown-content"
               [ngClass]="{
                 'mobile-open': dropdownStates[item.id]
               }"
             >
-              <button class="dropdown-content__btn" (mousedown)="editProduct.emit(item)">
+              <button
+                class="dropdown-content__btn"
+                (mousedown)="editProduct.emit(item); closeDropdown(item.id)"
+              >
                 <i class="fa-solid fa-pen-to-square"></i> Modificar
               </button>
-              <button class="dropdown-content__btn" (mousedown)="deleteProduct.emit(item)">
+              <button
+                class="dropdown-content__btn"
+                (mousedown)="deleteProduct.emit(item); closeDropdown(item.id)"
+              >
                 <i class="fa-solid fa-trash"></i> Eliminar
+              </button>
+              <button
+                class="dropdown-content__btn"
+                (mousedown)="
+                  itemSelected = item; showModalDescription = true; closeDropdown(item.id)
+                "
+              >
+                <i class="fa-solid fa-eye"></i> Visualizar
               </button>
             </div>
           </div>
@@ -112,7 +124,7 @@
   [showModal]="showModalDescription"
   [template]="description"
   [isCloseable]="true"
-  [size]="sizeModal.MEDIUM"
+  [size]="sizeModal.SMALL"
   (clickClose)="showModalDescription = false"
 >
 </app-modal>

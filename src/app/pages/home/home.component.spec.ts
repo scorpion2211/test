@@ -84,7 +84,6 @@ describe('HomeComponent', () => {
     spyOn(productsService, 'verifyID').and.returnValue(of(true));
     spyOn(productsService, 'deleteProduct').and.returnValue(of(''));
     const alertServiceSpy = spyOn(alertService.message$, 'next');
-    const loadingServiceSpy = spyOn(loadingService.loading$, 'next');
 
     component.itemSelected = item;
     component.deleteProduct();

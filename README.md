@@ -14,8 +14,8 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ## Build
 
-Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
-Run `npm run build:prod` to build the project for production. The build artifacts will be stored in the `dist/` directory.
+- Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
+- Run `npm run build:prod` to build the project for production. The build artifacts will be stored in the `dist/` directory.
 
 ## Commits
 
@@ -23,12 +23,12 @@ Rules are added to the commit to be approved. You must complicate with the confi
 
 ## Add product
 
-Only images from a url will be allowed
-url used for product image: `https://www.pngkey.com/png/full/299-2993445_manufacturing-products-product-icon-png-white.png`
+- Only images from a url will be allowed.
+- Image url used for product registration: `https://raw.githubusercontent.com/scorpion2211/test/master/src/assets/images/box.png`
 
 ## Notes
 
 - The exercise will not clarify whether the names of the products can be repeated, so said repetition will be assumed valid.
 - The product search was not specified by which field it should be taken so it will be assumed that it will only search by the product name.
-- It is not specified if the ID can be editable, so the user will be allowed to change it, but when submitting the form it will be validated whether it exists or not. If it does not exist, the user will be informed and no data will be updated or a new product added.
+- It is not specified if the ID can be editable, so the user will not be able to change it. In this way, the problem of if the user changes the ID for that of another product is avoided, which would cause a product to be stepped on and duplicated, losing the previous one.era una simple ppregunta
 - FontAwesome icon library is incorporated and a random image from the internet of a box is loaded to represent the product, so the internet was required to run the project.

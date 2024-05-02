@@ -22,7 +22,7 @@ describe('ModalComponent', () => {
   it('should close modal on overlay click', () => {
     const event: any = { target: { classList: { contains: () => true } } };
 
-    spyOn<any>(component.clickClose, 'emit');
+    spyOn(component.clickClose, 'emit');
 
     component.isCloseable = true;
     component.closeModalOverlay(event);

@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoadingComponent } from './loading.component';
 import { LoadingService } from 'src/app/services/loading/loading.service';
-import { BehaviorSubject } from 'rxjs';
 
 describe('LoadingComponent', () => {
   let component: LoadingComponent;

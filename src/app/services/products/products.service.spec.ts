@@ -98,7 +98,7 @@ describe('ProductsService', () => {
 
     expect(spyVerifyID).toHaveBeenCalledTimes(MOCK_RECORDS.length);
     expect(spyAddProduct).toHaveBeenCalledTimes(MOCK_RECORDS.length);
-    MOCK_RECORDS.forEach((item, index) => {
+    MOCK_RECORDS.forEach((item) => {
       expect(spyVerifyID).toHaveBeenCalledWith(item.id);
       expect(spyAddProduct).toHaveBeenCalledWith(item);
     });
