@@ -12,6 +12,8 @@ import { TableModule } from 'src/app/shared/components/table/table.module';
 import { ModalModule } from 'src/app/shared/components/modal/modal.module';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'src/app/shared/components/button/button.module';
+import { IDataRecord } from 'src/app/shared/utils/records.interface';
+import { MOCK_RECORDS } from 'src/app/shared/utils/mocks';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -50,5 +52,11 @@ describe('HomeComponent', () => {
     expect(component.sizeModal).toEqual(ESizeModal);
     expect(component.isLoadingTable).toBeTruthy();
     expect(component._totalData).toEqual([]);
+  });
+  it('should select item to be deleted', () => {
+    const item: IDataRecord = MOCK_RECORDS[0];
+    component.selectItemToBeDeleted(item);
+    expect(component.itemSelected).toEqual(item);
+    expect(component.showModalConfirm).toBeTrue();
   });
 });

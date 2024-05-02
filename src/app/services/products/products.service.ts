@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap, take } from 'rxjs';
 import { MOCK_RECORDS } from 'src/app/shared/utils/mocks';
 import { IDataRecord } from 'src/app/shared/utils/records.interface';
 import { environment } from 'src/environments/environment';
@@ -39,25 +39,22 @@ export class ProductsService {
   pushRandomProducts() {
     MOCK_RECORDS.forEach((item) => {
       this.verifyID(item.id)
+        .pipe(take(1))
         .pipe(
           switchMap((exist) => {
             if (!exist) {
-              return this.addProduct(item);
+              return this.addProduct(item).pipe(take(1));
             }
             return of();
           }),
         )
-        .subscribe((products) => {
-          console.log(products);
-        });
+        .subscribe();
     });
   }
 
   removeAllProducts(products: IDataRecord[]) {
     products.forEach((item) => {
-      this.deleteProduct(item.id).subscribe((products) => {
-        console.log(products);
-      });
+      this.deleteProduct(item.id).pipe(take(1)).subscribe();
     });
   }
 }

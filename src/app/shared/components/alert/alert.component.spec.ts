@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { AlertComponent } from './alert.component';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { EAlertType } from '../../utils/alert-type.enum';
@@ -24,7 +24,7 @@ describe('AlertComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should subscribe to alert service and show alert', () => {
+  it('should subscribe to alert service and show alert', fakeAsync(() => {
     const message = {
       description: 'Test alert',
       type: EAlertType.INFO,
@@ -32,7 +32,10 @@ describe('AlertComponent', () => {
     alertService.message$.next(message);
     expect(component.message).toEqual(message);
     expect(component.showAlert).toBeTrue();
-  });
+    tick(6000);
+    fixture.detectChanges();
+    expect(component.showAlert).toBe(false);
+  }));
 
   it('should hide alert', () => {
     component.showAlert = true;

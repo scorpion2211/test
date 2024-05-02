@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private productsService: ProductsService,
     private alertService: AlertService,
-    private router: Router,
+    public router: Router,
     private loadingService: LoadingService,
   ) {}
 
