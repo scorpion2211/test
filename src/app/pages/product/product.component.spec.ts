@@ -1,15 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProductComponent } from './product.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { LoadingService } from 'src/app/services/loading/loading.service';
 import { ProductsService } from 'src/app/services/products/products.service';
 import { of, throwError } from 'rxjs';
 import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
-import { ETypesButton } from 'src/app/shared/utils/type-button.enum';
 import { IDataRecord } from 'src/app/shared/utils/records.interface';
+import { FormBuilder } from '@angular/forms';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
@@ -17,7 +16,6 @@ describe('ProductComponent', () => {
   let productsService: ProductsService;
   let alertService: AlertService;
   let loadingService: LoadingService;
-  let formBuilder: FormBuilder;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -37,7 +35,6 @@ describe('ProductComponent', () => {
     productsService = TestBed.inject(ProductsService);
     alertService = TestBed.inject(AlertService);
     loadingService = TestBed.inject(LoadingService);
-    formBuilder = TestBed.inject(FormBuilder);
     fixture.detectChanges();
   });
 
@@ -47,7 +44,7 @@ describe('ProductComponent', () => {
 
   it('should initialize form and load params on ngOnInit', () => {
     const initializeFormSpy = spyOn(component, 'initializeForm').and.callThrough();
-    const loadParamsSpy = spyOn(component, 'loadParams' as any).and.callThrough();
+    const loadParamsSpy = spyOn(component, 'loadParams').and.callThrough();
 
     component.ngOnInit();
 

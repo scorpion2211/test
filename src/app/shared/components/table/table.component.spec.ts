@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TableComponent } from './table.component';
 import { IDataRecord } from '../../utils/records.interface';
-import { ESizeModal } from '../../utils/modal-size.enum';
 
 describe('TableComponent', () => {
   let component: TableComponent;

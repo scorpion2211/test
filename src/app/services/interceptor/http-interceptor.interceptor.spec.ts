@@ -3,6 +3,7 @@ import { HttpErrorResponse, HttpRequest, HttpHandler, HttpEvent } from '@angular
 import { HttpInterceptorInterceptor } from './http-interceptor.interceptor';
 import { Observable, throwError } from 'rxjs';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 describe('HttpInterceptorInterceptor', () => {
   let interceptor: HttpInterceptorInterceptor;
   let nextHandler: HttpHandler;
@@ -13,10 +14,10 @@ describe('HttpInterceptorInterceptor', () => {
     });
     interceptor = TestBed.inject(HttpInterceptorInterceptor);
     nextHandler = {
-      handle: (request: HttpRequest<any>): Observable<HttpEvent<any>> => {
-        return new Observable(); // Mock the HttpHandler
+      handle: (): Observable<HttpEvent<any>> => {
+        return new Observable();
       },
-    };
+    } as HttpHandler;
   });
 
   it('should be created', () => {
@@ -30,7 +31,7 @@ describe('HttpInterceptorInterceptor', () => {
     interceptor.intercept(request, nextHandler);
 
     expect(nextHandler.handle).toHaveBeenCalledOnceWith(jasmine.any(HttpRequest));
-    const modifiedRequest = (nextHandler.handle as any).calls.mostRecent()
+    const modifiedRequest = (nextHandler.handle as jasmine.Spy).calls.mostRecent()
       .args[0] as HttpRequest<any>;
     expect(modifiedRequest.headers.get('authorId')).toEqual('96');
   });
