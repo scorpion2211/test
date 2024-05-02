@@ -18,4 +18,15 @@ describe('ModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should close modal on overlay click', () => {
+    const event: any = { target: { classList: { contains: () => true } } };
+
+    spyOn<any>(component.clickClose, 'emit');
+
+    component.isCloseable = true;
+    component.closeModalOverlay(event);
+
+    expect(component.clickClose.emit).toHaveBeenCalledWith(false);
+  });
 });
