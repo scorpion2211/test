@@ -2,15 +2,11 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ProductGuard } from './product.guard';
 import { ProductsService } from 'src/app/services/products/products.service';
-import { Router, ActivatedRouteSnapshot } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { IDataRecord } from 'src/app/shared/utils/records.interface';
+import { ActivatedRouteSnapshot } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ProductGuard', () => {
   let guard: ProductGuard;
-  let productService: ProductsService;
-  let router: Router;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -18,8 +14,6 @@ describe('ProductGuard', () => {
       providers: [ProductGuard, ProductsService],
     });
     guard = TestBed.inject(ProductGuard);
-    productService = TestBed.inject(ProductsService);
-    router = TestBed.inject(Router);
   });
 
   it('should be created', () => {

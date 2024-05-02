@@ -5,8 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { LoadingService } from 'src/app/services/loading/loading.service';
 import { ProductsService } from 'src/app/services/products/products.service';
-import { BehaviorSubject, of, throwError } from 'rxjs';
-import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
+import { BehaviorSubject, of } from 'rxjs';
 import { IDataRecord } from 'src/app/shared/utils/records.interface';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'src/app/shared/components/button/button.module';
@@ -15,10 +14,7 @@ import { MOCK_RECORDS } from 'src/app/shared/utils/mocks';
 describe('ProductComponent', () => {
   let component: ProductComponent;
   let fixture: ComponentFixture<ProductComponent>;
-  let productsService: ProductsService;
-  let alertService: AlertService;
   let loadingService: LoadingService;
-  let productServiceSpy: jasmine.SpyObj<ProductsService>;
 
   beforeEach(async () => {
     const editableProductSubject = new BehaviorSubject<IDataRecord | null>(null);
@@ -28,7 +24,6 @@ describe('ProductComponent', () => {
       updateProduct: jasmine.createSpy(),
       editableProduct$: new BehaviorSubject<IDataRecord | null>(null),
     });
-    alertService = jasmine.createSpyObj('AlertService', ['message$']);
 
     productServiceSpyObj.editableProduct$ = editableProductSubject.asObservable();
 
@@ -48,10 +43,7 @@ describe('ProductComponent', () => {
 
     fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
-    productsService = TestBed.inject(ProductsService);
-    alertService = TestBed.inject(AlertService);
     loadingService = TestBed.inject(LoadingService);
-    productServiceSpy = TestBed.inject(ProductsService) as jasmine.SpyObj<ProductsService>;
     fixture.detectChanges();
   });
 
