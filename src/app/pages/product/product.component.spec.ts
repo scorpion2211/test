@@ -8,7 +8,8 @@ import { ProductsService } from 'src/app/services/products/products.service';
 import { of, throwError } from 'rxjs';
 import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
 import { IDataRecord } from 'src/app/shared/utils/records.interface';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ButtonModule } from 'src/app/shared/components/button/button.module';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
@@ -20,7 +21,7 @@ describe('ProductComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ProductComponent],
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule,ReactiveFormsModule, ButtonModule],
       providers: [
         ProductsService,
         AlertService,

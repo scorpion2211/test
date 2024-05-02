@@ -7,7 +7,7 @@ import { TableSkeletonModule } from '../table-skeleton/table-skeleton.module';
 
 @NgModule({
   declarations: [TableComponent],
-  exports: [TableComponent],
   imports: [CommonModule, ModalModule, FormsModule, TableSkeletonModule],
+  exports: [TableComponent],
 })
 export class TableModule {}

@@ -36,14 +36,15 @@ export class HomeComponent implements OnInit {
      * If the ID is empty or has few products, uncomment this line to load products
      */
     //this.productsService.pushRandomProducts();
+    this.isLoadingTable = true;
     this.loadProducts();
   }
 
   private loadProducts() {
-    this.isLoadingTable = true;
     this.productsService.getProducts().subscribe({
       next: (data) => {
         this._totalData = data;
+        this.isLoadingTable = false;
 
         /**
          * If you want to clear the list for some reason, uncomment the following line

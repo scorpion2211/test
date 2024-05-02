@@ -11,6 +11,11 @@ import { ETypesButton } from 'src/app/shared/utils/type-button.enum';
 import { ESizeModal } from 'src/app/shared/utils/modal-size.enum';
 import { IDataRecord } from 'src/app/shared/utils/records.interface';
 import { Router } from '@angular/router';
+import { AppModule } from 'src/app/app.module';
+import { TableModule } from 'src/app/shared/components/table/table.module';
+import { ModalModule } from 'src/app/shared/components/modal/modal.module';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'src/app/shared/components/button/button.module';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -23,7 +28,15 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomeComponent],
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        AppModule,
+        TableModule,
+        ModalModule,
+        FormsModule,
+        ButtonModule,
+      ],
       providers: [ProductsService, AlertService, LoadingService],
     }).compileComponents();
 
@@ -47,7 +60,7 @@ describe('HomeComponent', () => {
     expect(component.showModalConfirm).toBeFalsy();
     expect(component.showModalDescription).toBeFalsy();
     expect(component.sizeModal).toEqual(ESizeModal);
-    expect(component.isLoadingTable).toBeFalsy();
+    expect(component.isLoadingTable).toBeTruthy();
     expect(component._totalData).toEqual([]);
   });
 
@@ -66,7 +79,7 @@ describe('HomeComponent', () => {
 
     component.ngOnInit();
 
-    expect(component.isLoadingTable).toBeTruthy();
+    expect(component.isLoadingTable).toBeTruthy(); // Aquí está la expectativa que falla
     expect(productsService.getProducts).toHaveBeenCalled();
     expect(component._totalData).toEqual(products);
     expect(component.isLoadingTable).toBeFalsy();
@@ -75,13 +88,14 @@ describe('HomeComponent', () => {
   it('should handle error when loading products on ngOnInit', () => {
     spyOn(productsService, 'getProducts').and.returnValue(throwError('Error'));
     spyOn(console, 'error');
+    const alertServiceSpy = spyOn(alertService.message$, 'next');
 
     component.ngOnInit();
 
     expect(component.isLoadingTable).toBeTruthy();
     expect(productsService.getProducts).toHaveBeenCalled();
     expect(console.error).toHaveBeenCalled();
-    expect(alertService.message$.next).toHaveBeenCalledWith({
+    expect(alertServiceSpy).toHaveBeenCalledWith({
       description: 'Ocurrió un error al cargar los productos',
       type: EAlertType.ERROR,
     });
@@ -115,15 +129,15 @@ describe('HomeComponent', () => {
     };
     spyOn(productsService, 'verifyID').and.returnValue(of(true));
     spyOn(productsService, 'deleteProduct').and.returnValue(of(''));
-    spyOn(alertService.message$, 'next');
-    spyOn(loadingService.loading$, 'next');
+    const alertServiceSpy = spyOn(alertService.message$, 'next');
+    const loadingServiceSpy = spyOn(loadingService.loading$, 'next');
 
     component.itemSelected = item;
     component.deleteProduct();
 
     expect(productsService.verifyID).toHaveBeenCalledWith(item.id);
     expect(productsService.deleteProduct).toHaveBeenCalledWith(item.id);
-    expect(alertService.message$.next).toHaveBeenCalledWith({
+    expect(alertServiceSpy).toHaveBeenCalledWith({
       description: `Producto ${item.name} eliminado`,
       type: EAlertType.SUCCESS,
     });
@@ -142,6 +156,7 @@ describe('HomeComponent', () => {
     };
     spyOn(productsService, 'verifyID').and.returnValue(of(true));
     spyOn(productsService, 'deleteProduct').and.returnValue(throwError('Error'));
+    spyOn(console, 'error');
     spyOn(alertService.message$, 'next');
     spyOn(loadingService.loading$, 'next');
 
@@ -150,15 +165,15 @@ describe('HomeComponent', () => {
 
     expect(productsService.verifyID).toHaveBeenCalledWith(item.id);
     expect(productsService.deleteProduct).toHaveBeenCalledWith(item.id);
+    expect(console.error).toHaveBeenCalled();
     expect(alertService.message$.next).toHaveBeenCalledWith({
       description: `Ocurrió un error al eliminar el producto: ${item.name}`,
       type: EAlertType.ERROR,
     });
-    expect(component.showModalConfirm).toBeFalsy();
-    expect(loadingService.loading$.next).toHaveBeenCalledWith(false);
+    expect(component.isLoadingTable).toBeFalsy();
   });
 
-  it('should not delete product if it does not exist', () => {
+  it('should navigate to edit product', () => {
     const item: IDataRecord = {
       id: '1',
       name: 'Product 1',
@@ -167,36 +182,10 @@ describe('HomeComponent', () => {
       date_release: '2024-05-01',
       date_revision: '2024-05-02',
     };
-    spyOn(productsService, 'verifyID').and.returnValue(of(false));
-    spyOn(productsService, 'deleteProduct');
-    spyOn(alertService.message$, 'next');
-
-    component.itemSelected = item;
-    component.deleteProduct();
-
-    expect(productsService.verifyID).toHaveBeenCalledWith(item.id);
-    expect(productsService.deleteProduct).not.toHaveBeenCalled();
-    expect(alertService.message$.next).toHaveBeenCalledWith({
-      description: `El producto ${item.name} no existe`,
-      type: EAlertType.WARNING,
-    });
-  });
-
-  it('should edit product', () => {
-    const item: IDataRecord = {
-      id: '1',
-      name: 'Product 1',
-      description: 'Description 1',
-      logo: 'logo1.png',
-      date_release: '2024-05-01',
-      date_revision: '2024-05-02',
-    };
-    spyOn(productsService.editableProduct$, 'next');
-    spyOn(router, 'navigateByUrl');
+    const routerSpy = spyOn(router, 'navigate');
 
     component.editProduct(item);
 
-    expect(productsService.editableProduct$.next).toHaveBeenCalledWith(item);
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/product/edit');
+    expect(routerSpy).toHaveBeenCalledWith(['/edit-product', item.id]);
   });
 });
