@@ -123,7 +123,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    if (this.isEditMode && this.productForm.get('id')?.value !== this._productData) {
+    if (this.isEditMode && this.productForm.get('id')?.value !== this._productData?.id) {
       this.alertService.message$.next({
         description: `No se permite editar el ID de un producto existente`,
         type: EAlertType.INFO,
