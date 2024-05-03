@@ -27,7 +27,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   public typeButton = ETypesButton;
   public sizeButton = ESizeButton;
 
-  private _productData: IDataRecord | null = null;
+  _productData: IDataRecord | null = null;
   subscription = new Subscription();
   constructor(
     private productsService: ProductsService,
@@ -123,6 +123,14 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
+    if (this.isEditMode && this.productForm.get('id')?.value !== this._productData) {
+      this.alertService.message$.next({
+        description: `No se permite editar el ID de un producto existente`,
+        type: EAlertType.INFO,
+      });
+      this.productForm.get('id')?.setValue(this._productData?.id);
+      return;
+    }
     this.submitted = true;
     if (this.productForm.invalid) {
       return;

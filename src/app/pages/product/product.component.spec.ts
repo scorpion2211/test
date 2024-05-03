@@ -10,11 +10,13 @@ import { IDataRecord } from 'src/app/shared/utils/records.interface';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'src/app/shared/components/button/button.module';
 import { MOCK_RECORDS } from 'src/app/shared/utils/mocks';
+import { EAlertType } from 'src/app/shared/utils/alert-type.enum';
 
 describe('ProductComponent', () => {
   let component: ProductComponent;
   let fixture: ComponentFixture<ProductComponent>;
   let loadingService: LoadingService;
+  let alertService: AlertService;
 
   beforeEach(async () => {
     const editableProductSubject = new BehaviorSubject<IDataRecord | null>(null);
@@ -44,6 +46,7 @@ describe('ProductComponent', () => {
     fixture = TestBed.createComponent(ProductComponent);
     component = fixture.componentInstance;
     loadingService = TestBed.inject(LoadingService);
+    alertService = TestBed.inject(AlertService);
     fixture.detectChanges();
   });
 
@@ -102,14 +105,8 @@ describe('ProductComponent', () => {
   it('should submit form', () => {
     spyOn(component, 'resetForm').and.callThrough();
 
-    component.productForm.setValue({
-      id: '1',
-      name: 'Product 1',
-      description: 'Description 1',
-      logo: 'logo1.png',
-      date_release: '2024-05-01',
-      date_revision: '2025-05-01',
-    });
+    component.isEditMode = false;
+    component.productForm.setValue(MOCK_RECORDS[0]);
 
     component.onSubmit();
     expect(component.submitted).toBeTrue();
@@ -119,5 +116,35 @@ describe('ProductComponent', () => {
     setTimeout(() => {
       expect(component.resetForm).toHaveBeenCalled();
     }, 1000);
+  });
+
+  it('should show alert when trying to edit existing product ID', () => {
+    const alertServiceSpy = spyOn(alertService.message$, 'next');
+
+    component.isEditMode = true;
+    component._productData = MOCK_RECORDS[0];
+    component.productForm.setValue(MOCK_RECORDS[0]);
+
+    component.onSubmit();
+
+    expect(alertServiceSpy).toHaveBeenCalledWith({
+      description: `No se permite editar el ID de un producto existente`,
+      type: EAlertType.INFO,
+    });
+
+    expect(component.productForm.get('id')?.value).toBe('esMuuS');
+  });
+
+  it('should return form controls', () => {
+    const formBuilder = new FormBuilder();
+    component.productForm = formBuilder.group({
+      id: ['1'],
+      name: ['Product 1'],
+      description: ['Description 1'],
+    });
+    const controls = component.formControls;
+    expect(controls['id']).toBeDefined();
+    expect(controls['name']).toBeDefined();
+    expect(controls['description']).toBeDefined();
   });
 });
