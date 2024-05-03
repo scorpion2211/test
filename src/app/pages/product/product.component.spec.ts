@@ -123,7 +123,8 @@ describe('ProductComponent', () => {
 
     component.isEditMode = true;
     component._productData = MOCK_RECORDS[0];
-    component.productForm.setValue(MOCK_RECORDS[0]);
+    const data = { ...MOCK_RECORDS[0], id: 'test1' };
+    component.productForm.setValue(data);
 
     component.onSubmit();
 
